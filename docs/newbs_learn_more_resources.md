@@ -1,28 +1,28 @@
-# Learning Resources
+# 학습 자료
 
-These resources are aimed at giving new members in the QMK community more understanding to the information provided in the Newbs docs.
+이 자료들은 QMK 커뮤니티의 새로운 구성원들이 Newbs 문서에서 제공하는 정보를 더 잘 이해할 수 있도록 돕기 위해 마련되었습니다.
 
-### QMK resources
+### QMK 자료
 
-* [Thomas Baart's QMK Basics Blog](https://thomasbaart.nl/category/mechanical-keyboards/firmware/qmk/qmk-basics/) – A user-created blog covering the basics of how to use QMK Firmware, as seen from a new user's perspective.
+* [Thomas Baart의 QMK 기초 블로그](https://thomasbaart.nl/category/mechanical-keyboards/firmware/qmk/qmk-basics/) – 새로운 사용자의 관점에서 QMK 펌웨어 사용의 기초를 다루는 사용자 작성 블로그입니다.
 
-### Command Line resources
+### 명령줄 자료
 
-* [Good General Tutorial on Command Line](https://www.codecademy.com/learn/learn-the-command-line)
-* [Must Know Linux Commands](https://www.guru99.com/must-know-linux-commands.html)<br>
-* [Some Basic Unix Commands](https://www.tjhsst.edu/~dhyatt/superap/unixcmd.html)
+* [좋은 일반 명령줄 튜토리얼](https://www.codecademy.com/learn/learn-the-command-line)
+* [필수 Linux 명령어](https://www.guru99.com/must-know-linux-commands.html)
+* [기본 Unix 명령어](https://www.tjhsst.edu/~dhyatt/superap/unixcmd.html)
 
-### Text Editor resources
+### 텍스트 에디터 자료
 
-Not sure which text editor to use?
-* [a great introduction to the subject](https://learntocodewith.me/programming/basics/text-editors/)
+어떤 텍스트 에디터를 사용해야 할지 모르겠나요?
+* [주제에 대한 훌륭한 소개](https://learntocodewith.me/programming/basics/text-editors/)
 
-Editors specifically made for code:
+코드를 위해 특별히 제작된 에디터:
 * [Sublime Text](https://www.sublimetext.com/)
 * [VS Code](https://code.visualstudio.com/)
 
-### Git resources
+### Git 자료
 
-* [Great General Tutorial](https://www.codecademy.com/learn/learn-git)
-* [Flight Rules For Git](https://github.com/k88hudson/git-flight-rules)
-* [Git Game To Learn From Examples](https://learngitbranching.js.org/)
+* [훌륭한 일반 튜토리얼](https://www.codecademy.com/learn/learn-git)
+* [Git을 위한 비행 규칙](https://github.com/k88hudson/git-flight-rules)
+* [예제를 통해 배우는 Git 게임](https://learngitbranching.js.org/)

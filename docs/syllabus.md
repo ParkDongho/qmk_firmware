@@ -1,72 +1,73 @@
-# QMK Syllabus
+# QMK 커리큘럼
 
-This page helps you build up your QMK knowledge by introducing the basics first and guiding you to understanding all the concepts you need to know to be proficient with QMK.
+이 페이지는 기본 개념을 먼저 소개하고 필요한 개념을 이해하도록 안내하여 QMK를 숙달할 수 있도록 도와줍니다.
 
-# Beginning Topics
+## 초급 주제
 
-If you read nothing else you should read the documents in this section. After reading the [Tutorial](newbs) you should be able to create a basic keymap, compile it, and flash it to your keyboard. The remaining documents will flesh out your knowledge of these basics.
+이 섹션의 문서를 읽는 것만으로도 많은 도움이 됩니다. [튜토리얼](newbs)을 읽고 나면 기본적인 키맵을 생성하고, 컴파일하고, 키보드에 플래시할 수 있어야 합니다. 나머지 문서들은 이러한 기본 지식을 보충해줄 것입니다.
 
-* **Learn How To Use QMK Tools**
-    * [Tutorial](newbs)
+* **QMK 도구 사용법 배우기**
+    * [튜토리얼](newbs)
     * [CLI](cli)
     * [GIT](newbs_git_best_practices)
-* **Learn About Keymaps**
-    * [Layers](feature_layers)
-    * [Keycodes](keycodes)
-        * The full list of keycodes you can use. Note that some may require knowledge found in the Intermediate or Advanced Topics.
-* **Configuring IDEs** - Optional
+* **키맵에 대해 배우기**
+    * [레이어](feature_layers)
+    * [키코드](keycodes)
+        * 사용할 수 있는 키코드의 전체 목록입니다. 일부는 중급 또는 고급 주제에서 배운 지식이 필요할 수 있습니다.
+* **IDE 구성하기** - 선택 사항
     * [Eclipse](other_eclipse)
     * [VS Code](other_vscode)
 
-# Intermediate Topics
+## 중급 주제
 
-These topics start to dig into some of the features that QMK supports. You don't have to read all of these documents, but some of the documents in the Advanced Topics section won't make sense if you skip over some of these.
+이 주제들은 QMK가 지원하는 일부 기능을 다룹니다. 모든 문서를 읽을 필요는 없지만, 고급 주제 섹션의 일부 문서는 중급 주제를 건너뛰면 이해하기 어려울 수 있습니다.
 
-* **Learn How To Configure Features**
-    <!-- * Configuration Overview  FIXME(skullydazed/anyone): write this document -->
-    * [Audio](features/audio)
-    * Lighting
-        * [Backlight](features/backlight)
-        * [LED Matrix](features/led_matrix)
-        * [RGB Lighting](features/rgblight)
-        * [RGB Matrix](features/rgb_matrix)
-    * [Tap-Hold Configuration](tap_hold)
-    * [Squeezing Space from AVR](squeezing_avr)
-* **Learn More About Keymaps**
-    * [Keymaps](keymap)
-    * [Custom Functions and Keycodes](custom_quantum_functions)
-    * Macros
-        * [Dynamic Macros](features/dynamic_macros)
-        * [Compiled Macros](feature_macros)
-    * [Tap Dance](features/tap_dance)
-    * [Combos](features/combo)
-    * [Userspace](feature_userspace)
-    * [Key Overrides](features/key_overrides)
+* **기능 구성하는 방법 배우기**
+    * [오디오](features/audio)
+    * 조명
+        * [백라이트](features/backlight)
+        * [LED 매트릭스](features/led_matrix)
+        * [RGB 조명](features/rgblight)
+        * [RGB 매트릭스](features/rgb_matrix)
+    * [탭-홀드 구성](tap_hold)
+    * [AVR 공간 절약하기](squeezing_avr)
+* **키맵에 대해 더 배우기**
+    * [키맵](keymap)
+    * [커스텀 함수 및 키코드](custom_quantum_functions)
+    * 매크로
+        * [동적 매크로](features/dynamic_macros)
+        * [컴파일된 매크로](feature_macros)
+    * [탭 댄스](features/tap_dance)
+    * [콤보](features/combo)
+    * [사용자 공간](feature_userspace)
+    * [키 오버라이드](features/key_overrides)
 
-# Advanced Topics
+## 고급 주제
 
-Everything below here requires a lot of foundational knowledge. Besides being able to create keymaps using advanced features you should be familiar with using both `config.h` and `rules.mk` to configure options for your keyboard.
+이후의 모든 내용은 많은 기초 지식을 요구합니다. 고급 기능을 사용하여 키맵을 만들 수 있을 뿐만 아니라 `config.h`와 `rules.mk`를 사용하여 키보드 옵션을 구성할 수 있어야 합니다.
 
-* **Maintaining Keyboards Within QMK**
-    * [Handwiring a Keyboard](hand_wire)
-    * [Keyboard Guidelines](hardware_keyboard_guidelines)
-    * [info.json Reference](reference_info_json)
-    * [Debounce API](feature_debounce_type)
-* **Advanced Features**
-    * [Unicode](features/unicode)
+* **QMK 내에서 키보드 유지 관리하기**
+    * [키보드 손으로 배선하기](hand_wire)
+    * [키보드 가이드라인](hardware_keyboard_guidelines)
+    * [info.json 참고자료](reference_info_json)
+    * [디바운스 API](feature_debounce_type)
+* **고급 기능**
+    * [유니코드](features/unicode)
     * [API](api_overview)
-    * [Bootmagic Lite](features/bootmagic)
-* **Hardware**
-    * [How Keyboards Work](how_keyboards_work)
-    * [How A Keyboard Matrix Works](how_a_matrix_works)
-    * [Split Keyboards](features/split_keyboard)
-    * [Stenography](features/stenography)
-    * [Pointing Devices](features/pointing_device)
-* **Core Development**
-    * [Coding Conventions](coding_conventions_c)
-    * [Compatible Microcontrollers](compatible_microcontrollers)
-    * [Custom Matrix](custom_matrix)
-    * [Understanding QMK](understanding_qmk)
-* **CLI Development**
-    * [Coding Conventions](coding_conventions_python)
-    * [CLI Development Overview](cli_development)
+    * [부트매직 라이트](features/bootmagic)
+* **하드웨어**
+    * [키보드 작동 방식](how_keyboards_work)
+    * [키보드 매트릭스 작동 방식](how_a_matrix_works)
+    * [분할 키보드](features/split_keyboard)
+    * [속기](features/stenography)
+    * [포인팅 디바이스](features/pointing_device)
+* **코어 개발**
+    * [코딩 규칙](coding_conventions_c)
+    * [호환 가능한 마이크로컨트롤러](compatible_microcontrollers)
+    * [커스텀 매트릭스](custom_matrix)
+    * [QMK 이해하기](understanding_qmk)
+* **CLI 개발**
+    * [코딩 규칙](coding_conventions_python)
+    * [CLI 개발 개요](cli_development)
+
+

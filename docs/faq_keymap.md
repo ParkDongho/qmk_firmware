@@ -1,151 +1,152 @@
-# Keymap FAQ
+# 키맵 FAQ
 
-This page covers questions people often have about keymaps. If you haven't you should read [Keymap Overview](keymap) first.
+이 페이지는 키맵에 대해 자주 묻는 질문들을 다룹니다. 먼저 [Keymap Overview](keymap)를 읽어보세요.
 
-## What Keycodes Can I Use?
+## 사용할 수 있는 키코드는 무엇인가요?
 
-See [Keycodes](keycodes) for an index of keycodes available to you. These link to more extensive documentation when available.
+사용 가능한 키코드에 대한 색인은 [Keycodes](keycodes)를 참조하세요. 가능할 때마다 더 자세한 문서로 링크되어 있습니다.
 
-Keycodes are actually defined in [quantum/keycode.h](https://github.com/qmk/qmk_firmware/blob/master/quantum/keycode.h).
+키코드는 실제로 [quantum/keycode.h](https://github.com/qmk/qmk_firmware/blob/master/quantum/keycode.h)에서 정의되어 있습니다.
 
-## What Are the Default Keycodes?
+## 기본 키코드는 무엇인가요?
 
-There are 3 standard keyboard layouts in use around the world- ANSI, ISO, and JIS. North America primarily uses ANSI, Europe and Africa primarily use ISO, and Japan uses JIS. Regions not mentioned typically use either ANSI or ISO. The keycodes corresponding to these layouts are shown here:
+전 세계적으로 사용되는 표준 키보드 레이아웃은 세 가지가 있습니다 - ANSI, ISO, JIS. 북미는 주로 ANSI를 사용하고, 유럽과 아프리카는 주로 ISO를 사용하며, 일본은 JIS를 사용합니다. 언급되지 않은 지역은 일반적으로 ANSI 또는 ISO를 사용합니다. 이러한 레이아웃에 해당하는 키코드는 다음과 같습니다:
 
 <!-- Source for this image: https://www.keyboard-layout-editor.com/#/gists/bf431647d1001cff5eff20ae55621e9a -->
 ![Keyboard Layout Image](https://i.imgur.com/5wsh5wM.png)
 
-## How Can I Make Custom Names For Complex Keycodes?
+## 복잡한 키코드에 대해 사용자 정의 이름을 만들 수 있나요?
 
-Sometimes, for readability's sake, it's useful to define custom names for some keycodes. People often define custom names using `#define`. For example:
+때로는 가독성을 위해 일부 키코드에 대해 사용자 정의 이름을 정의하는 것이 유용합니다. 사람들은 종종 `#define`을 사용하여 사용자 정의 이름을 정의합니다. 예를 들어:
 
 ```c
 #define FN_CAPS LT(_FL, KC_CAPS)
 #define ALT_TAB LALT(KC_TAB)
 ```
 
-This will allow you to use `FN_CAPS` and `ALT_TAB` in your keymap, keeping it more readable.
+이렇게 하면 `FN_CAPS`와 `ALT_TAB`을 키맵에서 사용할 수 있어 읽기 쉽게 유지할 수 있습니다.
 
-## My Keymap Doesn't Update When I Flash It
+## 키맵을 플래시했을 때 업데이트되지 않아요
 
-This is usually due to VIA, and has to do with how it deals with keymaps.
+이는 주로 VIA와 관련이 있으며, VIA가 키맵을 처리하는 방식과 관련이 있습니다.
 
-On first run, the VIA code in the firmware will copy the keymap from flash memory into EEPROM so that it can be rewritten at runtime by the VIA app. From this point QMK will use the keymap stored in EEPROM instead of flash, and so updates to your `keymap.c` will not be reflected.
+처음 실행 시, VIA 펌웨어의 코드는 플래시 메모리에서 EEPROM으로 키맵을 복사하여, VIA 앱에서 런타임 시 다시 쓸 수 있도록 합니다. 이 시점부터 QMK는 플래시 대신 EEPROM에 저장된 키맵을 사용하므로 `keymap.c`의 업데이트가 반영되지 않습니다.
 
-The simple fix for this is to clear the EEPROM. You can do this in several ways:
+이 문제를 해결하려면 EEPROM을 지우면 됩니다. 여러 가지 방법이 있습니다:
 
-* Hold the Bootmagic Lite key (usually top left/Escape) while plugging the board in, which will also place the board into bootloader mode; then unplug and replug the board.
-* Press the `QK_CLEAR_EEPROM`/`EE_CLR` keycode if it is accessible on your keymap.
-* Place the board into bootloader mode and hit the "Clear EEPROM" button. This may not be available for all bootloaders, and you may need to reflash the board afterwards.
+* 보드의 상단 왼쪽/ESC 키를 누른 상태로 보드를 연결하면, 보드가 부트로더 모드로 진입합니다. 그런 다음 보드를 뽑았다가 다시 꽂습니다.
+* 키맵에서 접근할 수 있는 경우 `QK_CLEAR_EEPROM`/`EE_CLR` 키코드를 누릅니다.
+* 보드를 부트로더 모드로 전환하고 "Clear EEPROM" 버튼을 누릅니다. 이는 모든 부트로더에서 사용할 수 없으며, 이후에 보드를 다시 플래시해야 할 수도 있습니다.
 
-## Some Of My Keys Are Swapped Or Not Working
+## 일부 키가 바뀌거나 작동하지 않아요
 
-QMK has a couple of features which allow you to change the behavior of your keyboard on the fly. This includes, but is not limited to, swapping Ctrl/Caps, disabling GUI, swapping Alt/GUI, swapping Backspace/Backslash, disabling all keys, and other behavioral modifications.
+QMK에는 키보드의 동작을 즉석에서 변경할 수 있는 몇 가지 기능이 있습니다. 여기에는 Ctrl/Caps 전환, GUI 비활성화, Alt/GUI 전환, Backspace/Backslash 전환, 모든 키 비활성화 등과 같은 행동 수정이 포함됩니다.
 
-Refer to the EEPROM clearing methods above, which should return those keys to normal operation. If that doesn't work, look here:
+위의 EEPROM 지우기 방법을 참조하여 해당 키를 정상 작동 상태로 되돌리세요. 그래도 해결되지 않으면 다음을 참조하세요:
 
 * [Magic Keycodes](keycodes_magic)
 * [Command](features/command)
 
-## The Menu Key Isn't Working
+## 메뉴 키가 작동하지 않아요
 
-The key found on most modern keyboards that is located between `KC_RGUI` and `KC_RCTL` is actually called `KC_APP`. This is because when the key was invented, there was already a key named "Menu" in the HID specification, so for whatever reason, Microsoft chose to create a new key and call it "Application".
+대부분의 현대 키보드에서 `KC_RGUI`와 `KC_RCTL` 사이에 있는 키는 실제로 `KC_APP`입니다. 이는 HID 사양에 이미 "Menu"라는 키가 있었기 때문에, Microsoft가 새로운 키를 만들고 "Application"이라고 부르기로 했기 때문입니다.
 
-## Power Keys Aren't Working
+## 전원 키가 작동하지 않아요
 
-Somewhat confusingly, there are two "Power" keycodes in QMK: `KC_KB_POWER` in the Keyboard/Keypad HID usage page, and `KC_SYSTEM_POWER` (or `KC_PWR`) in the Consumer page.
+약간 혼란스러운 점은 QMK에는 두 가지 "전원" 키코드가 있다는 것입니다: Keyboard/Keypad HID 사용 페이지의 `KC_KB_POWER`와 Consumer 페이지의 `KC_SYSTEM_POWER` (또는 `KC_PWR`).
 
-The former is only recognized on macOS, while the latter, `KC_SLEP` and `KC_WAKE` are supported by all three major operating systems, so it is recommended to use those instead. Under Windows, these keys take effect immediately, however on macOS they must be held down until a dialog appears.
+전자는 macOS에서만 인식되며, 후자인 `KC_SLEP` 및 `KC_WAKE`는 모든 주요 운영 체제에서 지원되므로 이 키들을 사용하는 것이 좋습니다. Windows에서는 이러한 키가 즉시 적용되지만, macOS에서는 대화 상자가 나타날 때까지 키를 눌러야 합니다.
 
 ## One Shot Modifier
 
-Solves my personal 'the' problem. I often got 'the' or 'THe' wrongly instead of 'The'.  One Shot Shift mitigates this for me.
+One Shot Shift는 개인적으로 'the' 문제를 해결합니다. 자주 'the' 또는 'THe'를 잘못 입력했었는데, One Shot Shift가 이를 완화해줍니다.
 https://github.com/tmk/tmk_keyboard/issues/67
 
-## Modifier/Layer Stuck
+## Modifier/Layer가 고정됩니다
 
-Modifier keys or layers can be stuck unless layer switching is configured properly.
-For Modifier keys and layer actions you have to place `KC_TRNS` on same position of destination layer to  unregister the modifier key or return to previous layer on release event.
+Modifier 키 또는 레이어가 고정될 수 있습니다. Modifier 키와 레이어 동작을 올바르게 구성하지 않으면 발생할 수 있습니다. Modifier 키와 레이어 동작에는 릴리스 이벤트 시 Modifier 키의 등록을 해제하거나 이전 레이어로 돌아가기 위해 대상 레이어의 동일한 위치에 `KC_TRNS`를 배치해야 합니다.
 
 * https://github.com/tmk/tmk_core/blob/master/doc/keymap.md#31-momentary-switching
 * https://geekhack.org/index.php?topic=57008.msg1492604#msg1492604
 * https://github.com/tmk/tmk_keyboard/issues/248
 
-## Mechanical Lock Switch Support
+## 기계식 잠금 스위치 지원
 
-This feature is for *mechanical lock switch* like [this Alps one](https://deskthority.net/wiki/Alps_SKCL_Lock). You can enable it by adding this to your `config.h`:
+이 기능은 [Alps 기계식 잠금 스위치](https://deskthority.net/wiki/Alps_SKCL_Lock)와 같은 *기계식 잠금 스위치*를 위한 것입니다. 이를 활성화하려면 `config.h`에 다음을 추가하세요:
 
 ```c
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE
 ```
 
-After enabling this feature use keycodes `KC_LCAP`, `KC_LNUM` and `KC_LSCR` in your keymap instead.
+이 기능을 활성화한 후에는 키맵에서 `KC_LCAP`, `KC_LNUM`, `KC_LSCR` 키코드를 대신 사용하세요.
 
-Old vintage mechanical keyboards occasionally have lock switches but modern ones don't have. ***You don't need this feature in most case and just use keycodes `KC_CAPS`, `KC_NUM` and `KC_SCRL`.***
+구형 빈티지 기계식 키보드에는 때때로 잠금 스위치가 있지만, 현대 키보드에는 없습니다. ***대부분의 경우 이 기능이 필요 없으며, `KC_CAPS`, `KC_NUM`, `KC_SCRL` 키코드를 사용하면 됩니다.***
 
-## Input Special Characters Other Than ASCII like Cédille 'Ç'
+## ASCII 이외의 특수 문자를 입력하는 방법 (예: Cédille 'Ç')
 
-See the [Unicode](features/unicode) feature.
+[Unicode](features/unicode) 기능을 참조하세요.
 
-## `Fn` Key on macOS
+## macOS의 `Fn` 키
 
-Unlike most Fn keys, the one on Apple keyboards actually has its own keycode... sort of. It takes the place of the sixth keycode in a basic 6KRO HID report -- so an Apple keyboard is in fact only 5KRO.
+대부분의 Fn 키와 달리 Apple 키보드의 Fn 키는 실제로 자체 키코드를 가지고 있습니다. Apple 키보드는 실제로 5KRO만 지원하기 때문에 기본 6KRO HID 보고서의 여섯 번째 키코드를 차지합니다.
 
-It is technically possible to get QMK to send this key. However, doing so requires modification of the report format to add the state of the Fn key.
-Even worse, it is not recognized unless the keyboard's VID and PID match that of a real Apple keyboard. The legal issues that official QMK support for this feature may create mean it is unlikely to happen.
+QMK에서 이 키를 보내는 것은 기술적으로 가능합니다. 하지만 이를 위해 보고서 형식을 수정하여 Fn 키의 상태를 추가해야 합니다.
+더 나쁜 것은, 키보드의 VID와 PID가 실제 Apple 키보드와 일치하지 않으면 인식되지 않는다는 점입니다. 이 기능을 공식적으로 지원하면 발생할 수 있는 법적 문제로 인해 QMK에서 이 기능을 지원할 가능성은 낮습니다.
 
-See [this issue](https://github.com/qmk/qmk_firmware/issues/2179) for detailed information.
+자세한 정보는 [이 이슈](https://github.com/qmk/qmk_firmware/issues/2179)를 참조하세요.
 
-## Keys Supported in Mac OSX?
+## Mac OSX에서 지원되는 키는 무엇인가요?
 
-You can know which keycodes are supported in OSX from this source code.
+OSX에서 어떤 키코드가 지원되는지 알 수 있는 소스 코드는 다음과 같습니다.
 
-`usb_2_adb_keymap` array maps Keyboard/Keypad Page usages to ADB scancodes(OSX internal keycodes).
+`usb_2_adb_keymap` 배열은 Keyboard/Keypad 페이지 사용법을 ADB 스캔 코드(OSX 내부 키코드)로 매핑합니다.
 
 https://opensource.apple.com/source/IOHIDFamily/IOHIDFamily-606.1.7/IOHIDFamily/Cosmo_USB2ADB.c
 
-And `IOHIDConsumer::dispatchConsumerEvent` handles Consumer page usages.
+그리고 `IOHIDConsumer::dispatchConsumerEvent`는 Consumer 페이지 사용법을 처리합니다.
 
 https://opensource.apple.com/source/IOHIDFamily/IOHIDFamily-606.1.7/IOHIDFamily/IOHIDConsumer.cpp
 
-## JIS Keys in Mac OSX
+## Mac OSX에서 JIS 키
 
-Japanese JIS keyboard specific keys like `無変換(Muhenkan)`, `変換(Henkan)`, `ひらがな(hiragana)` are not recognized on OSX. You can use **Seil** to enable those keys, try following options.
+일본 JIS 키보드의 특정 키인 `無変換(Muhenkan)`, `変換(Henkan)`, `ひらがな(hiragana)`는 OSX에서 인식되지 않습니다. **Seil**을 사용하여 이러한 키를 활성화할 수 있습니다. 다음 옵션을 시도해 보세요.
 
-* Enable NFER Key on PC keyboard
-* Enable XFER Key on PC keyboard
-* Enable KATAKANA Key on PC keyboard
+* PC 키보드에서 NFER 키 활성화
+* PC 키보드에서 XFER 키 활성화
+* PC 키보드에서 KATAKANA 키 활성화
 
 https://pqrs.org/osx/karabiner/seil.html
 
-## RN-42 Bluetooth Doesn't Work with Karabiner
+## Karabiner와 함께 RN-42 Bluetooth가 작동하지 않아요
 
-Karabiner - Keymapping tool on Mac OSX - ignores inputs from RN-42 module by default. You have to enable this option to make Karabiner working with your keyboard.
+Mac OSX의 키맵핑 도구인 Karabiner는 기본적으로 RN-42 모듈의 입력을 무시합니다. 이 옵션을 활성화하여 Karabiner가 키보드와 함께 작동하도록 해야 합니다.
 https://github.com/tekezo/Karabiner/issues/403#issuecomment-102559237
 
-See these for the detail of this problem.
+이 문제에 대한 자세한 내용은 다음을 참조하세요.
 https://github.com/tmk/tmk_keyboard/issues/213
-https://github.com/tekezo/Karabiner/issues/403
+https://github.com/tekezo/K
 
-## Esc and <code>&#96;</code> on a Single Key
+arabiner/issues/403
 
-See the [Grave Escape](features/grave_esc) feature.
+## Esc와 `<code>&#96;</code>`를 단일 키로 사용하기
 
-## Eject on Mac OSX
+[Grave Escape](features/grave_esc) 기능을 참조하세요.
 
-`KC_EJCT` keycode works on OSX. https://github.com/tmk/tmk_keyboard/issues/250
-It seems Windows 10 ignores the code and Linux/Xorg recognizes but has no mapping by default.
+## Mac OSX에서 Eject 키
 
-Not sure what keycode Eject is on genuine Apple keyboard actually. HHKB uses `F20` for Eject key(`Fn+F`) on Mac mode but this is not same as Apple Eject keycode probably.
+`KC_EJCT` 키코드는 OSX에서 작동합니다. https://github.com/tmk/tmk_keyboard/issues/250
+Windows 10에서는 이 코드가 무시되는 것 같고, Linux/Xorg에서는 인식되지만 기본적으로 매핑되지 않습니다.
 
-## What are "Real" and "Weak" modifiers?
+Apple의 실제 키보드에서 Eject 키의 키코드가 무엇인지 정확히는 알 수 없습니다. HHKB는 Mac 모드에서 Eject 키(`Fn+F`)로 `F20`을 사용하지만, 이는 아마도 Apple Eject 키코드와 다를 것입니다.
 
-Real modifiers refer to the state of the real/physical modifier keys, while weak modifiers are the state of "virtual" or temporary modifiers which should not interfere with the internal state of the real modifier keys.
+## "실제" 및 "약한" 수정자는 무엇인가요?
 
-The real and weak modifier states are ORed together when the keyboard report is sent, so if you release a weak modifier while the same real modifier is still held, the report does not change:
+실제 수정자는 실제/물리적 수정자 키의 상태를 나타내며, 약한 수정자는 실제 수정자 키의 내부 상태에 영향을 미치지 않아야 하는 "가상" 또는 임시 수정자의 상태를 나타냅니다.
 
- 1. **Hold down physical Left Shift:** Real mods now contains Left Shift, final state is Left Shift
- 2. **Add weak Left Shift:** Weak mods now contains Left Shift, final state is Left Shift
- 3. **Remove weak Left Shift:** Weak mods now contains nothing, final state is Left Shift
- 4. **Release physical Left Shift:** Real mods now contains nothing, final state is nothing
+실제 및 약한 수정자 상태는 키보드 보고서가 전송될 때 OR 연산이 수행되므로, 동일한 실제 수정자가 여전히 눌려 있는 동안 약한 수정자를 해제하면 보고서가 변경되지 않습니다:
+
+ 1. **물리적 왼쪽 Shift를 누르고 있음:** 실제 수정자에 왼쪽 Shift가 포함되어 있으며, 최종 상태는 왼쪽 Shift입니다.
+ 2. **약한 왼쪽 Shift 추가:** 약한 수정자에 왼쪽 Shift가 포함되며, 최종 상태는 왼쪽 Shift입니다.
+ 3. **약한 왼쪽 Shift 제거:** 약한 수정자에 아무 것도 포함되지 않으며, 최종 상태는 왼쪽 Shift입니다.
+ 4. **물리적 왼쪽 Shift 해제:** 실제 수정자에 아무 것도 포함되지 않으며, 최종 상태는 아무 것도 아닙니다.

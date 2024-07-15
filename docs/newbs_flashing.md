@@ -1,45 +1,45 @@
-# Flashing Your Keyboard
+# 키보드 플래싱하기
 
-Now that you've built a custom firmware file you'll want to flash your keyboard.
+이제 커스텀 펌웨어 파일을 빌드했으므로, 키보드를 플래싱할 준비가 되었습니다.
 
-## Put Your Keyboard into DFU (Bootloader) Mode
+## 키보드를 DFU(부트로더) 모드로 전환하기
 
-In order to flash your custom firmware you must first put your keyboard into a special flashing mode. While it is in this mode you will not be able to type or otherwise use your keyboard. It is very important that you do not unplug the keyboard or otherwise interrupt the flashing process while the firmware is being written.
+커스텀 펌웨어를 플래싱하려면 먼저 키보드를 특별한 플래싱 모드로 전환해야 합니다. 이 모드에서는 키보드를 사용할 수 없으며, 펌웨어가 작성되는 동안 키보드를 분리하거나 플래싱 과정을 중단하지 않도록 주의해야 합니다.
 
-Different keyboards have different ways to enter this special mode. If your PCB currently runs QMK, TMK, or PS2AVRGB (Bootmapper Client) and you have not been given specific instructions, try the following, in order:
+키보드마다 이 모드로 전환하는 방법이 다릅니다. 현재 PCB가 QMK, TMK 또는 PS2AVRGB(Bootmapper Client)를 실행 중이고 특정 지침을 받지 않았다면 다음 방법을 순서대로 시도해 보십시오:
 
-* Hold down both shift keys and press `Pause`
-* Hold down both shift keys and press `B`
-* Unplug your keyboard, hold down the Spacebar and `B` at the same time, plug in your keyboard and wait a second before releasing the keys
-* Unplug your keyboard, hold down the top or bottom left key (usually Escape or Left Control) and plug in your keyboard
-* Press the physical `RESET` button, usually located on the underside of the PCB
-* Locate header pins on the PCB labeled `RESET` and `GND`, and short them together while plugging your PCB in
+* 두 쉬프트 키를 누른 상태에서 `Pause` 키를 누릅니다.
+* 두 쉬프트 키를 누른 상태에서 `B` 키를 누릅니다.
+* 키보드의 전원을 뽑고, 스페이스바와 `B` 키를 동시에 누른 상태에서 키보드를 연결하고 잠시 기다린 후 키를 놓습니다.
+* 키보드의 전원을 뽑고, 상단 또는 하단 왼쪽 키(보통 Escape 또는 왼쪽 컨트롤)를 누른 상태에서 키보드를 연결합니다.
+* 보통 PCB의 하단에 위치한 물리적인 `RESET` 버튼을 누릅니다.
+* PCB에 `RESET`과 `GND`라고 표시된 헤더 핀을 찾아서 PCB를 연결하는 동안 이를 단락시킵니다.
 
-If you've attempted all of the above to no avail, and the main chip on the board says `STM32` or `RP2-B1` on it, this may be a bit more complicated. Generally your best bet is to ask on [Discord](https://discord.gg/Uq7gcHh) for assistance. It's likely some photos of the board will be asked for -- if you can get them ready beforehand it'll help move things along!
+위의 방법을 모두 시도했으나 실패한 경우, 보드의 메인 칩에 `STM32` 또는 `RP2-B1`이라고 적혀 있다면 약간 더 복잡할 수 있습니다. 일반적으로 [디스코드](https://discord.gg/Uq7gcHh)에서 도움을 요청하는 것이 좋습니다. 보드의 사진을 미리 준비해 두면 도움이 될 것입니다!
 
-Otherwise, you should see a message in yellow, similar to this in QMK Toolbox:
+그 외에는 QMK Toolbox에서 다음과 유사한 노란색 메시지를 볼 수 있어야 합니다:
 
 ```
 *** DFU device connected: Atmel Corp. ATmega32U4 (03EB:2FF4:0000)
 ```
 
-and this bootloader device will also be present in Device Manager, System Information.app, or `lsusb`.
+또한 이 부트로더 장치는 장치 관리자, 시스템 정보.app 또는 `lsusb`에서도 확인할 수 있습니다.
 
-## Flashing Your Keyboard with QMK Toolbox
+## QMK Toolbox로 키보드 플래싱하기
 
-The simplest way to flash your keyboard will be with the [QMK Toolbox](https://github.com/qmk/qmk_toolbox/releases).
+키보드를 플래싱하는 가장 간단한 방법은 [QMK Toolbox](https://github.com/qmk/qmk_toolbox/releases)를 사용하는 것입니다.
 
-However, the Toolbox is currently only available for Windows and macOS. If you're using Linux (or just wish to flash the firmware from the command line), skip to the [Flash your Keyboard from the Command Line](#flash-your-keyboard-from-the-command-line) section.
+그러나 Toolbox는 현재 Windows와 macOS에서만 사용할 수 있습니다. Linux를 사용 중이거나 명령줄에서 펌웨어를 플래싱하려는 경우, [명령줄에서 키보드 플래싱](#flash-your-keyboard-from-the-command-line) 섹션으로 이동하십시오.
 
 ::: tip
-QMK Toolbox is not necessary for flashing [RP2040 devices](flashing#raspberry-pi-rp2040-uf2).
+QMK Toolbox는 [RP2040 장치](flashing#raspberry-pi-rp2040-uf2) 플래싱에는 필요하지 않습니다.
 :::
 
-### Load the File into QMK Toolbox
+### QMK Toolbox에 파일 로드하기
 
-Begin by opening the QMK Toolbox application. You'll want to locate the firmware file in Finder or Explorer. Your keyboard firmware may be in one of two formats- `.hex` or `.bin`. QMK tries to copy the appropriate one for your keyboard into the root `qmk_firmware` directory.
+먼저 QMK Toolbox 애플리케이션을 엽니다. Finder 또는 Explorer에서 펌웨어 파일을 찾습니다. 키보드 펌웨어는 `.hex` 또는 `.bin` 형식일 수 있습니다. QMK는 적절한 형식을 `qmk_firmware` 디렉토리의 루트에 복사하려고 합니다.
 
-If you are on Windows or macOS, there are commands you can use to easily open the current folder in Explorer or Finder.
+Windows 또는 macOS에서는 현재 폴더를 Explorer 또는 Finder에서 쉽게 열 수 있는 명령이 있습니다.
 
 ::::tabs
 
@@ -57,23 +57,23 @@ open .
 
 ::::
 
-The firmware file always follows this naming format:
+펌웨어 파일은 항상 다음과 같은 이름 형식을 따릅니다:
 
 ```
 <keyboard_name>_<keymap_name>.{bin,hex}
 ```
 
-For example, the `planck/rev5` with a `default` keymap will have this filename:
+예를 들어, `planck/rev5`의 `default` 키맵은 다음과 같은 파일 이름을 가집니다:
 
 ```
 planck_rev5_default.hex
 ```
 
-Once you have located your firmware file, drag it into the "Local file" box in QMK Toolbox, or click "Open" and navigate to where your firmware file is stored.
+펌웨어 파일을 찾으면 QMK Toolbox의 "Local file" 상자로 드래그하거나 "Open"을 클릭하여 펌웨어 파일이 저장된 위치로 이동합니다.
 
-### Flash Your Keyboard
+### 키보드 플래싱하기
 
-Click the `Flash` button in QMK Toolbox. You will see output similar to the following:
+QMK Toolbox에서 `Flash` 버튼을 클릭합니다. 다음과 유사한 출력이 표시됩니다:
 
 ```
 *** DFU device connected: Atmel Corp. ATmega32U4 (03EB:2FF4:0000)
@@ -94,39 +94,38 @@ Click the `Flash` button in QMK Toolbox. You will see output similar to the foll
 *** DFU device disconnected: Atmel Corp: ATmega32U4 (03EB:2FF4:0000)
 ```
 
-## Flash your Keyboard from the Command Line
+## 명령줄에서 키보드 플래싱하기
 
-This has been made pretty simple compared to what it used to be. When you are ready to compile and flash your firmware, open up your terminal window and run the flash command:
+이전보다 훨씬 간단해졌습니다. 펌웨어를 컴파일하고 플래싱할 준비가 되면 터미널 창을 열고 플래시 명령을 실행합니다:
 
 ```sh
 qmk flash
 ```
 
-If you did not configure your keyboard/keymap name in the CLI according to the [Configure your build environment](newbs_getting_started) section, or you have multiple keyboards, you can specify the keyboard and keymap:
+빌드 환경 구성 시 CLI에서 키보드/키맵 이름을 설정하지 않았거나 여러 개의 키보드가 있는 경우, 키보드와 키맵을 지정할 수 있습니다:
 
 ```sh
 qmk flash -kb <my_keyboard> -km <my_keymap>
 ```
 
-This will check the keyboard's configuration, and then attempt to flash it based on the specified bootloader. This means that you don't need to know which bootloader that your keyboard uses. Just run the command, and let the command do the heavy lifting.
+이 명령은 키보드의 구성을 확인한 다음, 지정된 부트로더를 기반으로 플래싱을 시도합니다. 따라서 키보드가 사용하는 부트로더를 알 필요가 없습니다. 명령을 실행하고 명령이 알아서 처리하도록 하십시오.
 
-However, this does rely on the bootloader being set by the keyboard. If this information is not configured, or you're using a board that doesn't have a supported target to flash it, you will see this error:
+그러나 이는 키보드에 의해 부트로더가 설정된 경우에만 작동합니다. 이 정보가 구성되지 않았거나 지원되는 타겟이 없는 보드를 사용하는 경우 다음과 같은 오류가 발생할 수 있습니다:
 
 ```
 WARNING: This board's bootloader is not specified or is not supported by the ":flash" target at this time.
 ```
 
-In this case, you'll have to fall back on specifying the bootloader. See the [Flashing Firmware](flashing) Guide for more details.
+이 경우, 부트로더를 지정해야 합니다. 자세한 내용은 [펌웨어 플래싱](flashing) 가이드를 참조하십시오.
 
 ::: warning
-If your bootloader is not detected by `qmk flash`, try running `qmk doctor` for suggestions on how to fix common problems.
+`qmk flash`에서 부트로더가 감지되지 않는 경우, 일반적인 문제를 해결하는 방법에 대한 제안을 얻으려면 `qmk doctor`를 실행해 보십시오.
 :::
 
-## Test It Out!
+## 테스트하기
 
-Congrats! Your custom firmware has been programmed to your keyboard and you're ready to test it out!
+축하합니다! 커스텀 펌웨어가 키보드에 프로그래밍되었으며, 이제 테스트할 준비가 되었습니다!
 
-With a little bit of luck everything will work perfectly, but if not there are steps that will help you figure out what's wrong.
-Testing your keyboard is usually pretty straightforward. Press every single key and make sure it sends the keys you expect. You can use [QMK Configurator](https://config.qmk.fm/#/test/)'s test mode to check your keyboard, even if it doesn't run QMK.
+운이 좋다면 모든 것이 완벽하게 작동할 것입니다. 그렇지 않다면 무엇이 문제인지 알아내는 데 도움이 되는 단계가 있습니다. 키보드를 테스트하는 것은 일반적으로 매우 간단합니다. 모든 키를 눌러보고 예상한 키가 전송되는지 확인하십시오. QMK가 실행되지 않더라도 [QMK 설정 도구](https://config.qmk.fm/#/test/)의 테스트 모드를 사용하여 키보드를 확인할 수 있습니다.
 
-Still not working? Browse the FAQ topics for more information, or [chat with us on Discord](https://discord.gg/Uq7gcHh).
+여전히 작동하지 않나요? 자세한 정보를 얻으려면 FAQ 항목을 살펴보거나 [디스코드에서 문의](https://discord.gg/Uq7gcHh)하십시오.

@@ -1,37 +1,36 @@
-# Understanding QMK's Code
+# QMK 코드 이해하기
 
-This document attempts to explain how the QMK firmware works from a very high level. It assumes you understand basic programming concepts but does not (except where needed to demonstrate) assume familiarity with C. It assumes that you have a basic understanding of the following documents:
+이 문서는 QMK 펌웨어가 어떻게 동작하는지에 대해 높은 수준에서 설명하고자 합니다. 기본적인 프로그래밍 개념을 이해하고 있다는 가정하에 작성되었으며, C 언어에 익숙하지 않더라도 필요한 부분에서만 설명합니다. 다음 문서들을 기본적으로 이해하고 있다고 가정합니다:
 
-* [Introduction](getting_started_introduction)
-* [How Keyboards Work](how_keyboards_work)
+* [소개](getting_started_introduction)
+* [키보드의 작동 원리](how_keyboards_work)
 * [FAQ](faq_general)
 
-## Startup
+## 시작
 
-You can think of QMK as no different from any other computer program. It is started and performs its tasks, but this program never finishes. Like other C programs, the entry point is the `main()` function. For QMK, the `main()` function is found in [`quantum/main.c`](https://github.com/qmk/qmk_firmware/blob/0.15.13/quantum/main.c#L55).
+QMK를 다른 컴퓨터 프로그램과 다르지 않다고 생각할 수 있습니다. 시작하여 작업을 수행하지만 이 프로그램은 절대 끝나지 않습니다. 다른 C 프로그램처럼 진입점은 `main()` 함수입니다. QMK의 `main()` 함수는 [`quantum/main.c`](https://github.com/qmk/qmk_firmware/blob/0.15.13/quantum/main.c#L55)에 있습니다.
 
-If you browse through the `main()` function you'll find that it starts by initializing any hardware that has been configured (including USB to the host). The most common platform for QMK is `lufa`, which runs on AVR processors such as the atmega32u4. When compiled for that platform, it will invoke for example `platform_setup()` in [`platforms/avr/platform.c`](https://github.com/qmk/qmk_firmware/blob/0.15.13/platforms/avr/platform.c#L19) and `protocol_setup()` in [`tmk_core/protocol/lufa/lufa.c`](https://github.com/qmk/qmk_firmware/blob/0.15.13/tmk_core/protocol/lufa/lufa.c#L1066). It will use other implementations when compiled for other platforms like `chibios` and `vusb`. At first glance, it can look like a lot of functionality but most of the time the code will be disabled by `#define`s.
+`main()` 함수를 살펴보면, 설정된 하드웨어(호스트에 대한 USB 포함)를 초기화하는 것으로 시작합니다. QMK의 가장 일반적인 플랫폼은 AVR 프로세서(atmega32u4 등)에서 실행되는 `lufa`입니다. 이 플랫폼을 위해 컴파일되면 [`platforms/avr/platform.c`](https://github.com/qmk/qmk_firmware/blob/0.15.13/platforms/avr/platform.c#L19)의 `platform_setup()`과 [`tmk_core/protocol/lufa/lufa.c`](https://github.com/qmk/qmk_firmware/blob/0.15.13/tmk_core/protocol/lufa/lufa.c#L1066)의 `protocol_setup()`을 호출합니다. 다른 플랫폼(`chibios`, `vusb` 등)으로 컴파일되면 다른 구현을 사용합니다. 처음에는 많은 기능처럼 보일 수 있지만, 대부분의 경우 코드가 `#define`에 의해 비활성화됩니다.
 
-The `main()` function will then start the core part of the program with a [`while (true)`](https://github.com/qmk/qmk_firmware/blob/0.15.13/quantum/main.c#L63). This is [The Main Loop](#the-main-loop).
+그런 다음 `main()` 함수는 [`while (true)`](https://github.com/qmk/qmk_firmware/blob/0.15.13/quantum/main.c#L63)로 프로그램의 핵심 부분을 시작합니다. 이것이 [메인 루프](#the-main-loop)입니다.
 
-## The Main Loop
+## 메인 루프
 
-This section of code is called "The Main Loop" because it's responsible for looping over the same set of instructions forever, without ever reaching the end. This is where QMK dispatches out to the functions responsible for making the keyboard do everything it is supposed to do.
+이 코드 섹션은 "메인 루프"라고 불리며, 끝에 도달하지 않고 영원히 동일한 명령 집합을 반복하는 역할을 합니다. 여기서 QMK는 키보드가 수행해야 할 모든 작업을 담당하는 함수로 분배됩니다.
 
-The main loop will call [`protocol_task()`](https://github.com/qmk/qmk_firmware/blob/0.15.13/quantum/main.c#L38), which in turn will call `keyboard_task()` in [`quantum/keyboard.c`](https://github.com/qmk/qmk_firmware/blob/0.15.13/quantum/keyboard.c#L377). This is where all the keyboard specific functionality is dispatched, and it is responsible for detecting changes in the matrix and turning status LEDs on and off.
+메인 루프는 [`protocol_task()`](https://github.com/qmk/qmk_firmware/blob/0.15.13/quantum/main.c#L38)를 호출하며, 이는 [`quantum/keyboard.c`](https://github.com/qmk/qmk_firmware/blob/0.15.13/quantum/keyboard.c#L377)의 `keyboard_task()`를 호출합니다. 여기에서 모든 키보드 관련 기능이 분배되며, 매트릭스의 변화 감지와 상태 LED의 켜짐 및 꺼짐을 담당합니다.
 
-Within `keyboard_task()` you'll find code to handle:
+`keyboard_task()` 내에서는 다음과 같은 작업을 처리하는 코드를 찾을 수 있습니다:
 
-* [Matrix Scanning](#matrix-scanning)
-* Mouse Handling
-* Keyboard status LEDs (Caps Lock, Num Lock, Scroll Lock)
+* [매트릭스 스캔](#matrix-scanning)
+* 마우스 처리
+* 키보드 상태 LED (Caps Lock, Num Lock, Scroll Lock)
 
-#### Matrix Scanning
+#### 매트릭스 스캔
 
-Matrix scanning is the core function of a keyboard firmware. It is the process of detecting which keys are currently pressed, and your keyboard runs this function many times a second. It's no exaggeration to say that 99% of your firmware's CPU time is spent on matrix scanning.
+매트릭스 스캔은 키보드 펌웨어의 핵심 기능입니다. 현재 어떤 키가 눌려 있는지 감지하는 과정이며, 이 기능은 초당 여러 번 실행됩니다. 펌웨어의 CPU 시간의 99%가 매트릭스 스캔에 사용된다고 해도 과언이 아닙니다.
 
-While there are different strategies for doing the actual matrix detection, they are out of scope for this document. It is sufficient to treat matrix scanning as a black box, you ask for the matrix's current state and get back a datastructure that looks like this:
-
+실제 매트릭스 감지에 대한 다양한 전략이 있지만, 이 문서의 범위를 벗어납니다. 매트릭스 스캔을 블랙 박스로 취급하고, 매트릭스의 현재 상태를 요청하여 다음과 같은 데이터 구조를 얻는 것으로 충분합니다:
 
 ```
 {
@@ -43,15 +42,15 @@ While there are different strategies for doing the actual matrix detection, they
 }
 ```
 
-That datastructure is a direct representation of the matrix for a 5 row by 4 column numpad. When a key is pressed that key's position within the matrix will be returned as `1` instead of `0`.
+이 데이터 구조는 5행 4열의 숫자 패드에 대한 매트릭스를 직접적으로 나타냅니다. 키가 눌리면 해당 키의 매트릭스 내 위치가 `0` 대신 `1`로 반환됩니다.
 
-Matrix Scanning runs many times per second. The exact rate varies but typically it runs at least 10 times per second to avoid perceptible lag.
+매트릭스 스캔은 초당 여러 번 실행됩니다. 정확한 속도는 다르지만, 일반적으로 인지할 수 있는 지연을 피하기 위해 최소한 초당 10번 실행됩니다.
 
-##### Matrix to Physical Layout Map
+##### 매트릭스에서 물리적 레이아웃으로의 매핑
 
-Once we know the state of every switch on our keyboard we have to map that to a keycode. In QMK this is done by making use of C macros to allow us to separate the definition of the physical layout from the definition of keycodes.
+키보드의 각 스위치 상태를 알게 되면 이를 키코드로 매핑해야 합니다. QMK에서는 물리적 레이아웃 정의와 키코드 정의를 분리하기 위해 C 매크로를 사용합니다.
 
-At the keyboard level we define a C macro (typically named `LAYOUT()`) which maps our keyboard's matrix to physical keys. Sometimes the matrix does not have a switch in every location, and we can use this macro to pre-populate those with KC_NO, making the keymap definition easier to work with. Here's an example `LAYOUT()` macro for a numpad:
+키보드 수준에서는 매트릭스를 물리적 키에 매핑하는 C 매크로(`LAYOUT()`)를 정의합니다. 때로는 매트릭스에 모든 위치에 스위치가 없는 경우도 있으며, 이 매크로를 사용하여 이를 `KC_NO`로 미리 채워 키맵 정의를 쉽게 할 수 있습니다. 다음은 숫자 패드에 대한 `LAYOUT()` 매크로의 예입니다:
 
 ```c
 #define LAYOUT( \
@@ -69,13 +68,13 @@ At the keyboard level we define a C macro (typically named `LAYOUT()`) which map
 }
 ```
 
-Notice how the second block of our `LAYOUT()` macro matches the Matrix Scanning array above? This macro is what will map the matrix scanning array to keycodes. However, if you look at a 17 key numpad you'll notice that it has 3 places where the matrix could have a switch but doesn't, due to larger keys. We have populated those spaces with `KC_NO` so that our keymap definition doesn't have to.
+두 번째 블록이 매트릭스 스캔 배열과 일치하는 것을 볼 수 있습니까? 이 매크로가 매트릭스 스캔 배열을 키코드에 매핑하는 역할을 합니다. 17키 숫자 패드를 보면 더 큰 키로 인해 매트릭스에 스위치가 없는 3곳이 있습니다. 이를 `KC_NO`로 채워 키맵 정의를 더 쉽게 만들 수 있습니다.
 
-You can also use this macro to handle unusual matrix layouts, for example the [Alice](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/keyboards/sneakbox/aliceclone/aliceclone.h#L24). Explaining that is outside the scope of this document.
+이 매크로를 사용하여 예외적인 매트릭스 레이아웃을 처리할 수도 있습니다. 예를 들어 [Alice](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/keyboards/sneakbox/aliceclone/aliceclone.h#L24). 이를 설명하는 것은 이 문서의 범위를 벗어납니다.
 
-##### Keycode Assignment
+##### 키코드 할당
 
-At the keymap level we make use of our `LAYOUT()` macro above to map keycodes to physical locations to matrix locations. It looks like this:
+키맵 수준에서는 앞서 정의한 `LAYOUT()` 매크로를 사용하여 키코드를 물리적 위치에서 매트릭스 위치로 매핑합니다. 다음과 같이 보입니다:
 
 ```c
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -89,13 +88,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 }
 ```
 
-Notice how all of these arguments match up with the first half of the `LAYOUT()` macro from the last section? This is how we take a keycode and map it to our Matrix Scan from earlier.
+모든 인수가 이전 섹션의 `LAYOUT()` 매크로의 첫 번째 절반과 일치하는 것을 볼 수 있습니다. 이렇게 해서 키코드를 이전의 매트릭스 스캔과 매핑합니다.
 
-##### State Change Detection
+##### 상태 변화 감지
 
-The matrix scanning described above tells us the state of the matrix at a given moment, but your computer only wants to know about changes, it doesn't care about the current state. QMK stores the results from the last matrix scan and compares the results from this matrix to determine when a key has been pressed or released.
+위에서 설명한 매트릭스 스캔은 주어진 순간에 매트릭스의 상태를 알려줍니다. 하지만 컴퓨터는 현재 상태가 아닌 변경 사항만을 원합니다. QMK는 마지막 매트릭스 스캔의 결과를 저장하고 현재 매트릭스의 결과와 비교하여 키가 눌리거나 릴리스될 때를 감지합니다.
 
-Let's look at an example. We'll hop into the middle of a keyboard scanning loop to find that our previous scan looks like this:
+예를 들어 보겠습니다. 키보드 스캔 루프의 중간에 들어가서 이전 스캔이 다음과 같다고 가정합니다:
 
 ```
 {
@@ -107,7 +106,7 @@ Let's look at an example. We'll hop into the middle of a keyboard scanning loop 
 }
 ```
 
-And when our current scan completes it will look like this:
+현재 스캔이 완료되면 다음과 같습니다:
 
 ```
 {
@@ -119,13 +118,15 @@ And when our current scan completes it will look like this:
 }
 ```
 
-Comparing against our keymap we can see that the pressed key is `KC_NUM`. From here we dispatch to the `process_record` set of functions.
+키맵을 비교하면 눌린 키가 `KC_NUM`임을 알 수 있습니다. 여기서부터는 `process_record` 함수 집합
+
+으로 분배됩니다.
 
 <!-- FIXME: Magic happens between here and process_record -->
 
-##### Process Record
+##### 프로세스 레코드
 
-The `process_record()` function itself is deceptively simple, but hidden within is a gateway to overriding functionality at various levels of QMK. The chain of events is listed below, using cluecard whenever we need to look at the keyboard/keymap level functions. Depending on options set in `rules.mk` or elsewhere, only a subset of the functions below will be included in final firmware.
+`process_record()` 함수는 겉보기에는 단순해 보이지만, QMK의 다양한 레벨에서 기능을 재정의할 수 있는 게이트웨이를 숨기고 있습니다. 이벤트 체인은 아래에 나열되어 있으며, 키보드/키맵 레벨 함수를 살펴봐야 할 때는 클루카드를 사용합니다. `rules.mk` 또는 다른 곳에서 설정된 옵션에 따라 아래 함수의 일부만 최종 펌웨어에 포함됩니다.
 
 * [`void action_exec(keyevent_t event)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/action.c#L78-L140)
     * [`void pre_process_record_quantum(keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/quantum.c#L204)
@@ -134,7 +135,7 @@ The `process_record()` function itself is deceptively simple, but hidden within 
       * [`bool process_combo(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_combo.c#L521)
   * [`void process_record(keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/action.c#L254)
     * [`bool process_record_quantum(keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/quantum.c#L224)
-      * [Map this record to a keycode](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/quantum.c#L225)
+      * [이 레코드를 키코드로 매핑](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/quantum.c#L225)
       * [`void velocikey_accelerate(void)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/velocikey.c#L27)
       * [`void update_wpm(uint16_t keycode)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/wpm.c#L109)
       * [`void preprocess_tap_dance(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_tap_dance.c#L118)
@@ -156,8 +157,10 @@ The `process_record()` function itself is deceptively simple, but hidden within 
       * [`bool process_tap_dance(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_tap_dance.c#L135)
       * [`bool process_caps_word(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_caps_word.c#L17)
       * [`bool process_unicode_common(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_unicode_common.c#L290)
-        calls one of:
-          * [`bool process_unicode(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_unicode.c#L21)
+        다음 중 하나를 호출:
+          * [`bool process_unicode(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da
+
+02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_unicode.c#L21)
           * [`bool process_unicodemap(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_unicodemap.c#L42)
           * [`bool process_ucis(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_ucis.c#L70)
       * [`bool process_leader(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_leader.c#L48)
@@ -169,30 +172,30 @@ The `process_record()` function itself is deceptively simple, but hidden within 
       * [`bool process_rgb(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_rgb.c#L53)
       * [`bool process_joystick(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_joystick.c#L9)
       * [`bool process_programmable_button(uint16_t keycode, keyrecord_t *record)`](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/process_keycode/process_programmable_button.c#L21)
-      * [Identify and process Quantum-specific keycodes](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/quantum.c#L343)
+      * [Quantum 전용 키코드 식별 및 처리](https://github.com/qmk/qmk_firmware/blob/325da02e57fe7374e77b82cb00360ba45167e25c/quantum/quantum.c#L343)
 
-At any step during this chain of events a function (such as `process_record_kb()`) can `return false` to halt all further processing.
+이 이벤트 체인 동안 언제든지 함수(예: `process_record_kb()`)가 `return false`를 호출하여 모든 추가 처리를 중지할 수 있습니다.
 
-After this is called, `post_process_record()` is called, which can be used to handle additional cleanup that needs to be run after the keycode is normally handled.
+이 호출 후, 추가 정리를 처리하는 `post_process_record()`가 호출됩니다.
 
 * [`void post_process_record(keyrecord_t *record)`]()
   * [`void post_process_record_quantum(keyrecord_t *record)`]()
-    * [Map this record to a keycode]()
+    * [이 레코드를 키코드로 매핑]()
     * [`void post_process_clicky(uint16_t keycode, keyrecord_t *record)`]()
     * [`void post_process_record_kb(uint16_t keycode, keyrecord_t *record)`]()
       * [`void post_process_record_user(uint16_t keycode, keyrecord_t *record)`]()
 
 <!--
-#### Mouse Handling
+#### 마우스 처리
 
-FIXME: This needs to be written
+FIXME: 작성 필요
 
-#### Serial Link(s)
+#### 시리얼 링크
 
-FIXME: This needs to be written
+FIXME: 작성 필요
 
-#### Keyboard state LEDs (Caps Lock, Num Lock, Scroll Lock)
+#### 키보드 상태 LED (Caps Lock, Num Lock, Scroll Lock)
 
-FIXME: This needs to be written
+FIXME: 작성 필요
 
 -->

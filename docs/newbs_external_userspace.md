@@ -1,40 +1,40 @@
-# External QMK Userspace
+# 외부 QMK 사용자 공간
 
-QMK Firmware now officially supports storing user keymaps outside of the normal QMK Firmware repository, allowing users to maintain their own keymaps without having to fork, modify, and maintain a copy of QMK Firmware themselves.
+QMK 펌웨어는 이제 사용자 키맵을 일반 QMK 펌웨어 리포지토리 외부에 저장하는 것을 공식적으로 지원합니다. 이를 통해 사용자는 QMK 펌웨어를 포크, 수정 및 유지 관리할 필요 없이 자신의 키맵을 관리할 수 있습니다.
 
-External Userspace mirrors the structure of the main QMK Firmware repository, but only contains the keymaps that you wish to build. You can still use `keyboards/<my keyboard>/keymaps/<my keymap>` to store your keymaps, or you can use the `layouts/<my layout>/<my keymap>` system as before -- they're just stored external to QMK Firmware.
+외부 사용자 공간은 주요 QMK 펌웨어 리포지토리의 구조를 반영하지만, 빌드하려는 키맵만 포함합니다. 여전히 `keyboards/<my keyboard>/keymaps/<my keymap>`을 사용하여 키맵을 저장하거나 이전과 같이 `layouts/<my layout>/<my keymap>` 시스템을 사용할 수 있습니다. 단, QMK 펌웨어 외부에 저장됩니다.
 
-The build system will still honor the use of `users/<my keymap>` if you rely on the traditional QMK Firmware [userspace feature](feature_userspace) -- it's now supported externally too, using the same location inside the External Userspace directory.
+빌드 시스템은 전통적인 QMK 펌웨어 [사용자 공간 기능](feature_userspace)을 사용하는 경우 `users/<my keymap>`의 사용을 여전히 허용합니다. 이제 외부에서도 동일한 위치에서 지원됩니다.
 
-Additionally, there is first-class support for using GitHub Actions to build your keymaps, allowing you to automatically compile your keymaps whenever you push changes to your External Userspace repository.
+또한 GitHub Actions를 사용하여 키맵을 빌드하는 것을 첫 번째 클래스 지원으로 제공하여, 외부 사용자 공간 리포지토리에 변경 사항을 푸시할 때마다 키맵을 자동으로 컴파일할 수 있습니다.
 
 ::: warning
-External Userspace is new functionality and may have issues. Tighter integration with the `qmk` command will occur over time.
+외부 사용자 공간은 새로운 기능으로, 문제가 있을 수 있습니다. `qmk` 명령과의 더 긴밀한 통합은 시간이 지남에 따라 이루어질 것입니다.
 :::
 
 ::: tip
-Historical keymap.json and GitHub-based firmware build instructions can be found [here](newbs_building_firmware_workflow). This document supersedes those instructions, but they should still function correctly.
+기존의 keymap.json 및 GitHub 기반 펌웨어 빌드 지침은 [여기](newbs_building_firmware_workflow)에서 찾을 수 있습니다. 이 문서는 그 지침을 대체하지만, 여전히 올바르게 작동해야 합니다.
 :::
 
-## Setting up QMK Locally
+## QMK 로컬 설정
 
-If you wish to build on your local machine, you will need to set up QMK locally. This is a one-time process, and is documented in the [newbs setup guide](newbs).
+로컬 머신에서 빌드하려면 QMK를 로컬로 설정해야 합니다. 이는 한 번만 수행하면 되며, [초보자 설정 가이드](newbs)에 문서화되어 있습니다.
 
 ::: warning
-If you wish to use any QMK CLI commands related to manipulating External Userspace definitions, you will currently need a copy of QMK Firmware as well.
+외부 사용자 공간 정의를 조작하는 QMK CLI 명령을 사용하려면 QMK 펌웨어의 사본도 필요합니다.
 :::
 
 ::: warning
-Building locally has a much shorter turnaround time than waiting for GitHub Actions to complete.
+로컬에서 빌드하는 것은 GitHub Actions가 완료되기를 기다리는 것보다 훨씬 빠릅니다.
 :::
 
-## External Userspace Repository Setup (forked on GitHub)
+## 외부 사용자 공간 리포지토리 설정 (GitHub에서 포크)
 
-A basic skeleton External Userspace repository can be found [here](https://github.com/qmk/qmk_userspace). If you wish to keep your keymaps on GitHub (strongly recommended!), you can fork the repository and use it as a base:
+기본적인 외부 사용자 공간 리포지토리는 [여기](https://github.com/qmk/qmk_userspace)에서 찾을 수 있습니다. 키맵을 GitHub에 유지하려면(강력히 권장됨!), 리포지토리를 포크하고 이를 기반으로 사용할 수 있습니다:
 
 ![Userspace Fork](https://i.imgur.com/hcegguh.png)
 
-Going ahead with your fork will copy it to your account, at which point you can clone it to your local machine and begin adding your keymaps:
+포크를 진행하면 계정에 복사되며, 로컬 머신으로 클론한 다음 키맵을 추가할 수 있습니다:
 
 ![Userspace Clone](https://i.imgur.com/CWYmsk8.png)
 
@@ -44,9 +44,9 @@ git clone https://github.com/{myusername}/qmk_userspace.git
 qmk config user.overlay_dir="$(realpath qmk_userspace)"
 ```
 
-## External Userspace Setup (locally stored only)
+## 외부 사용자 공간 설정 (로컬에만 저장)
 
-If you don't want to use GitHub and prefer to keep everything local, you can clone a copy of the default External Userspace locally instead:
+GitHub를 사용하지 않고 모든 것을 로컬로 유지하려는 경우, 기본 외부 사용자 공간의 사본을 로컬로 클론할 수 있습니다:
 
 ```sh
 cd $HOME
@@ -54,53 +54,53 @@ git clone https://github.com/qmk/qmk_userspace.git
 qmk config user.overlay_dir="$(realpath qmk_userspace)"
 ```
 
-## Adding a Keymap
+## 키맵 추가
 
-_These instructions assume you have already set up QMK locally, and have a copy of the QMK Firmware repository on your machine._
+_이 지침은 이미 QMK를 로컬로 설정하고, 머신에 QMK 펌웨어 리포지토리가 있는 상태를 전제로 합니다._
 
-Keymaps within External Userspace are defined in the same way as they are in the main QMK repository. You can either use the `qmk new-keymap` command to create a new keymap, or manually create a new directory in the `keyboards` directory.
+외부 사용자 공간 내의 키맵은 주요 QMK 리포지토리와 동일한 방식으로 정의됩니다. `qmk new-keymap` 명령을 사용하여 새 키맵을 생성하거나 `keyboards` 디렉토리에 새 디렉토리를 수동으로 생성할 수 있습니다.
 
-Alternatively, you can use the `layouts` directory to store your keymaps, using the same layout system as the main QMK repository -- if you choose to do so you'll want to use the path `layouts/<layout name>/<keymap name>/keymap.*` to store your keymap files, where `layout name` matches an existing layout in QMK, such as `tkl_ansi`.
+또는 `layouts` 디렉토리를 사용하여 키맵을 저장할 수 있으며, 주요 QMK 리포지토리와 동일한 레이아웃 시스템을 사용할 수 있습니다. 이 경우 키맵 파일을 `layouts/<layout name>/<keymap name>/keymap.*` 경로에 저장해야 하며, `layout name`은 QMK의 기존 레이아웃과 일치해야 합니다(예: `tkl_ansi`).
 
-After creating your new keymap, building the keymap matches normal QMK usage:
+새 키맵을 생성한 후, 키맵 빌드는 일반적인 QMK 사용과 일치합니다:
 
 ```sh
 qmk compile -kb <keyboard> -km <keymap>
 ```
 
 ::: warning
-The `qmk config user.overlay_dir=...` command must have been run when cloning the External Userspace repository for this to work correctly.
+외부 사용자 공간 리포지토리를 클론할 때 `qmk config user.overlay_dir=...` 명령을 실행해야 올바르게 작동합니다.
 :::
 
-## Adding the keymap to External Userspace build targets
+## 외부 사용자 공간 빌드 대상에 키맵 추가
 
-Once you have created your keymap, if you want to use GitHub Actions to build your firmware, you will need to add it to the External Userspace build targets. This is done using the `qmk userspace-add` command:
+키맵을 생성한 후, GitHub Actions를 사용하여 펌웨어를 빌드하려면 외부 사용자 공간 빌드 대상에 추가해야 합니다. 이는 `qmk userspace-add` 명령을 사용하여 수행됩니다:
 
 ```sh
-# for a keyboard/keymap combo:
+# 키보드/키맵 조합의 경우:
 qmk userspace-add -kb <keyboard> -km <keymap>
-# or, for a json-based keymap (if kept "loose"):
+# 또는, json 기반 키맵의 경우(독립적으로 유지되는 경우):
 qmk userspace-add <relative/path/to/my/keymap.json>
 ```
 
-This updates the `qmk.json` file in the root of your External Userspace directory. If you're using a git repository to store your keymaps, now is a great time to commit and push to your own fork.
+이 명령은 외부 사용자 공간 디렉토리의 루트에 있는 `qmk.json` 파일을 업데이트합니다. 키맵을 저장하는 데 git 리포지토리를 사용하는 경우, 이제 자신의 포크에 커밋하고 푸시할 좋은 기회입니다.
 
-## Compiling External Userspace build targets
+## 외부 사용자 공간 빌드 대상 컴파일
 
-Once you have added your keymaps to the External Userspace build targets, you can compile all of them at once using the `qmk userspace-compile` command:
+키맵을 외부 사용자 공간 빌드 대상에 추가한 후, `qmk userspace-compile` 명령을 사용하여 한 번에 모두 컴파일할 수 있습니다:
 
 ```sh
 qmk userspace-compile
 ```
 
-All firmware builds you've added to the External Userspace build targets will be built, and the resulting firmware files will be placed in the root of your External Userspace directory.
+외부 사용자 공간 빌드 대상에 추가된 모든 펌웨어 빌드가 컴파일되며, 생성된 펌웨어 파일은 외부 사용자 공간 디렉토리의 루트에 배치됩니다.
 
-## Using GitHub Actions
+## GitHub Actions 사용
 
-GitHub Actions can be used to automatically build your keymaps whenever you push changes to your External Userspace repository. If you have set up your list of build targets, this is as simple as enabling workflows in the GitHub repository settings:
+GitHub Actions를 사용하여 외부 사용자 공간 리포지토리에 변경 사항을 푸시할 때마다 키맵을 자동으로 빌드할 수 있습니다. 빌드 대상 목록을 설정한 경우, 이는 GitHub 리포지토리 설정에서 워크플로우를 활성화하는 것만큼 간단합니다:
 
 ![Repo Settings](https://i.imgur.com/EVkxOt1.png)
 
-Any push will result in compilation of all configured builds, and once completed a new release containing the newly-minted firmware files will be created on GitHub, which you can subsequently download and flash to your keyboard:
+어떤 푸시도 구성된 모든 빌드를 컴파일하며, 완료되면 새로 생성된 펌웨어 파일이 포함된 새 릴리스를 GitHub에서 생성하여 이를 다운로드하고 키보드에 플래시할 수 있습니다:
 
 ![Releases](https://i.imgur.com/zmwOL5P.png)

@@ -1,38 +1,38 @@
 # Quantum Mechanical Keyboard Firmware
 
-## What is QMK Firmware?
+## QMK 펌웨어란?
 
-QMK (*Quantum Mechanical Keyboard*) is an open source community centered around developing computer input devices. The community encompasses all sorts of input devices, such as keyboards, mice, and MIDI devices. A core group of collaborators maintains [QMK Firmware](https://github.com/qmk/qmk_firmware), [QMK Configurator](https://config.qmk.fm), [QMK Toolbox](https://github.com/qmk/qmk_toolbox), [qmk.fm](https://qmk.fm), and this documentation with the help of community members like you.
+QMK (*Quantum Mechanical Keyboard*)는 컴퓨터 입력 장치를 개발하는 오픈 소스 커뮤니티입니다. 이 커뮤니티는 키보드, 마우스, MIDI 장치 등 다양한 입력 장치를 포괄합니다. 핵심 그룹의 협력자들이 [QMK 펌웨어](https://github.com/qmk/qmk_firmware), [QMK 설정 도구](https://config.qmk.fm), [QMK 툴박스](https://github.com/qmk/qmk_toolbox), [qmk.fm](https://qmk.fm), 그리고 이 문서를 커뮤니티 구성원들의 도움을 받아 유지 관리합니다.
 
-## Get Started
+## 시작하기
 
-::: tip Basic
-[QMK Configurator](newbs_building_firmware_configurator)
+::: tip 기본
+[QMK 설정 도구](newbs_building_firmware_configurator)
 
-User friendly graphical interfaces, no programming knowledge required.
+프로그래밍 지식이 필요 없는 사용자 친화적인 그래픽 인터페이스.
 :::
 
-::: warning Advanced
-[Use The Source](newbs)
+::: warning 고급
+[소스 코드 사용](newbs)
 
-More powerful, but harder to use.
+더 강력하지만 사용하기 어려움.
 :::
 
-## Make It Yours
+## 나만의 키보드 만들기
 
-QMK has lots of features to explore, and a good deal of reference documentation to dig through. Most features are taken advantage of by modifying your [keymap](keymap), and changing the [keycodes](keycodes).
+QMK에는 탐험할 수 있는 많은 기능과 참조 문서가 있습니다. 대부분의 기능은 [키맵](keymap)을 수정하고 [키코드](keycodes)를 변경하여 활용됩니다.
 
-## Need help?
+## 도움이 필요하신가요?
 
-Check out the [support page](support) to see how you can get help using QMK.
+QMK 사용에 대한 도움을 받으려면 [지원 페이지](support)를 확인하십시오.
 
-## Give Back
+## 환원하기
 
-There are a lot of ways you can contribute to the QMK Community. The easiest way to get started is to use it and spread the word to your friends.
+QMK 커뮤니티에 기여할 수 있는 방법은 많습니다. 가장 쉬운 방법은 QMK를 사용하고 친구들에게 소문을 내는 것입니다.
 
-* Help people out on our forums and chat rooms:
+* 포럼과 채팅방에서 다른 사람을 도와주세요:
     * [/r/olkb](https://www.reddit.com/r/olkb/)
-    * [Discord Server](https://discord.gg/Uq7gcHh)
-* Contribute to our documentation by clicking "Edit This Page" at the bottom
-* [Report a bug](https://github.com/qmk/qmk_firmware/issues/new/choose)
-* [Open a Pull Request](contributing)
+    * [디스코드 서버](https://discord.gg/Uq7gcHh)
+* 페이지 하단의 "Edit This Page"를 클릭하여 문서에 기여하기
+* [버그 보고](https://github.com/qmk/qmk_firmware/issues/new/choose)
+* [풀 리퀘스트 열기](contributing)

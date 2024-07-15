@@ -1,167 +1,169 @@
-# Glossary of QMK Terms
+# QMK 용어 사전
 
 ## ARM
-A line of 32-bit MCUs produced by a number of companies, such as Atmel, Cypress, Kinetis, NXP, ST, and TI.
+Atmel, Cypress, Kinetis, NXP, ST, TI 등 여러 회사에서 생산하는 32비트 MCU 라인입니다.
 
 ## AVR
-A line of 8-bit MCUs produced by [Atmel](https://www.microchip.com/). AVR was the original platform that TMK supported.
+[Atmel](https://www.microchip.com/)에서 생산하는 8비트 MCU 라인입니다. AVR은 TMK가 처음 지원한 플랫폼입니다.
 
 ## AZERTY
-The standard Français (French) keyboard layout. Named for the first 6 keys on the keyboard.
+프랑스어 표준 키보드 레이아웃입니다. 키보드의 첫 6개 키 이름을 따서 명명되었습니다.
 
-## Backlight
-A generic term for lighting on a keyboard. The backlight is typically, but not always, an array of LEDs that shine through keycaps and/or switches.
+## 백라이트
+키보드의 조명을 지칭하는 일반적인 용어입니다. 백라이트는 일반적으로 키캡 및/또는 스위치를 통해 빛을 발산하는 LED 배열입니다.
 
-## Bluetooth
-A short range peer to peer wireless protocol. Most common wireless protocol for a keyboard.
+## 블루투스
+짧은 거리의 피어 투 피어 무선 프로토콜입니다. 키보드에서 가장 일반적인 무선 프로토콜입니다.
 
-## Bootloader
-A special program that is written to a protected area of your MCU that allows the MCU to upgrade its own firmware, typically over USB.
+## 부트로더
+MCU의 보호된 영역에 작성된 특별한 프로그램으로, MCU가 자체 펌웨어를 업그레이드할 수 있도록 합니다. 일반적으로 USB를 통해 이루어집니다.
 
 ## Bootmagic
-A feature that allows for various keyboard behavior changes to happen on the fly, such as swapping or disabling common keys.
+일반 키를 교환하거나 비활성화하는 등의 다양한 키보드 동작 변화를 실시간으로 가능하게 하는 기능입니다.
 
 ## C
-A low-level programming language suitable for system code. Most QMK code is written in C.
+시스템 코드를 작성하기에 적합한 저수준 프로그래밍 언어입니다. 대부분의 QMK 코드는 C로 작성됩니다.
 
 ## Colemak
-An alternative keyboard layout that is gaining in popularity.
+인기를 얻고 있는 대체 키보드 레이아웃입니다.
 
-## Compile
-The process of turning human readable code into machine code your MCU can run.
+## 컴파일
+사람이 읽을 수 있는 코드를 MCU가 실행할 수 있는 기계 코드로 변환하는 과정입니다.
 
 ## Dvorak
-An alternative keyboard layout developed by Dr. August Dvorak in the 1930's. A shortened form of the Dvorak Simplified Keyboard.
+1930년대 Dr. August Dvorak이 개발한 대체 키보드 레이아웃입니다. Dvorak Simplified Keyboard의 약칭입니다.
 
-## Dynamic Macro
-A macro which has been recorded on the keyboard and which will be lost when the keyboard is unplugged or the computer rebooted.
+## 동적 매크로
+키보드에서 기록되며 키보드가 플러그를 뽑거나 컴퓨터를 재부팅할 때 사라지는 매크로입니다.
 
-* [Dynamic Macro Documentation](features/dynamic_macros)
+* [동적 매크로 문서](features/dynamic_macros)
 
 ## Eclipse
-An IDE that is popular with many C developers.
+많은 C 개발자들이 사용하는 IDE입니다.
 
-* [Eclipse Setup Instructions](other_eclipse)
+* [Eclipse 설정 지침](other_eclipse)
 
-## Firmware
-The software that controls your MCU.
+## 펌웨어
+MCU를 제어하는 소프트웨어입니다.
 
 ## git
-Versioning software used at the command line
+명령 줄에서 사용되는 버전 관리 소프트웨어입니다.
 
 ## GitHub
-The website that hosts most of the QMK project. It provides integration with git, issue tracking, and other features that help us run QMK.
+대부분의 QMK 프로젝트를 호스팅하는 웹사이트입니다. git, 이슈 트래킹 등 QMK 운영에 필요한 통합 기능을 제공합니다.
 
 ## ISP
-In-system programming, a method of programming an AVR chip using external hardware and the JTAG pins.
+인시스템 프로그래밍, JTAG 핀을 사용하여 AVR 칩을 프로그래밍하는 방법입니다.
 
 ## hid_listen
-An interface for receiving debugging messages from your keyboard. You can view these messages using [QMK Flasher](https://github.com/qmk/qmk_flasher) or [PJRC's hid_listen](https://www.pjrc.com/teensy/hid_listen.html)
+키보드로부터 디버깅 메시지를 수신하는 인터페이스입니다. [QMK Flasher](https://github.com/qmk/qmk_flasher) 또는 [PJRC의 hid_listen](https://www.pjrc.com/teensy/hid_listen.html)을 사용하여 이러한 메시지를 볼 수 있습니다.
 
-## Keycode
-A 2-byte number that represents a particular key. `0x00`-`0xFF` are used for [Basic Keycodes](keycodes_basic) while `0x100`-`0xFFFF` are used for [Quantum Keycodes](quantum_keycodes).
+## 키코드
+특정 키를 나타내는 2바이트 숫자입니다. `0x00`-`0xFF`는 [기본 키코드](keycodes_basic)에 사용되며 `0x100`-`0xFFFF`는 [퀀텀 키코드](quantum_keycodes)에 사용됩니다.
 
-## Key Down
-An event that happens when a key is pressed down, but is completed before a key is released.
+## 키 다운
+키를 누를 때 발생하는 이벤트입니다. 키가 해제되기 전에 완료됩니다.
 
-## Key Up
-An event that happens when a key is released.
+## 키 업
+키가 해제될 때 발생하는 이벤트입니다.
 
-## Keymap
-An array of keycodes mapped to a physical keyboard layout, which are processed on key presses and releases
+## 키맵
+물리적 키보드 레이아웃에 매핑된 키코드 배열로, 키 눌림 및 해제 시 처리됩니다.
 
-## Layer
-An abstraction used to allow a key to serve multiple purposes. The highest active layer takes precedence.
+## 레이어
+키가 여러 가지 용도로 사용될 수 있게 하는 추상화입니다. 가장 높은 활성 레이어가 우선합니다.
 
-## Leader Key
-A feature that allows you to tap the leader key followed by a sequence of 1, 2, or 3 keys to activate key presses or other quantum features.
+## 리더 키
+리더 키를 탭한 다음 1, 2, 또는 3개의 키 시퀀스를 눌러 키 눌림 또는 기타 퀀텀 기능을 활성화할 수 있는 기능입니다.
 
-* [Leader Key Documentation](features/leader_key)
+* [리더 키 문서](features/leader_key)
 
 ## LED
-Light Emitting Diode, the most common device used for indicators on a keyboard.
+발광 다이오드로, 키보드에서 가장 일반적으로 사용되는 표시 장치입니다.
 
 ## Make
-Software package that is used to compile all the source files. You run `make` with various options to compile your keyboard firmware.
+모든 소스 파일을 컴파일하는 데 사용되는 소프트웨어 패키지입니다. `make` 명령어를 다양한 옵션과 함께 실행하여 키보드 펌웨어를 컴파일합니다.
 
-## Matrix
-A wiring pattern of columns and rows that enables the MCU to detect keypresses with a fewer number of pins. The matrix often incorporates diodes to allow for NKRO.
+## 매트릭스
+MCU가 적은 수의 핀으로 키 눌림을 감지할 수 있도록 하는 열과 행의 배선 패턴입니다. 매트릭스는 종종 NKRO를 허용하기 위해 다이오드를 포함합니다.
 
-## Macro
-A feature that lets you send multiple keypress events (hid reports) after having pressed only a single key.
+## 매크로
+단일 키를 누른 후 여러 키 눌림 이벤트(hid 보고서)를 보내는 기능입니다.
 
-* [Macro Documentation](feature_macros)
+* [매크로 문서](feature_macros)
 
 ## MCU
-Microcontrol Unit, the processor that powers your keyboard.
+Microcontroller Unit, 키보드를 구동하는 프로세서입니다.
 
-## Modifier
-A key that is held down while typing another key to modify the action of that key. Examples include Ctrl, Alt, and Shift.
+## 수정자
+다른 키를 입력할 때 눌러 키의 동작을 수정하는 키입니다. 예로는 Ctrl, Alt, Shift가 있습니다.
 
-## Mousekeys
-A feature that lets you control your mouse cursor and click from your keyboard.
+## 마우스키
+키보드로 마우스 커서를 제어하고 클릭할 수 있는 기능입니다.
 
-* [Mousekeys Documentation](features/mouse_keys)
+* [마우스키 문서](features/mouse_keys)
 
-## N-Key Rollover (NKRO)
-A term that applies to keyboards that are capable of reporting any number of key-presses at once.
+## N-Key 롤오버 (NKRO)
+한 번에 여러 개의 키 눌림을 보고할 수 있는 키보드에 적용되는 용어입니다.
 
-## Oneshot Modifier
-A modifier that acts as if it is held down until another key is released, so you can press the mod and then press the key, rather than holding the mod while pressing the key. Also known as a Sticky key or a Dead key.
+## 원샷 수정자
+다른 키가 해제될 때까지 눌린 것처럼 동작하여, 수정자를 누른 후 키를 누를 수 있도록 합니다. Sticky key 또는 Dead key라고도 합니다.
 
 ## ProMicro
-A low cost AVR development board. Clones of this device are often found on ebay very inexpensively (under $5) but people often struggle with flashing their pro micros.
+저렴한 AVR 개발 보드입니다. 이 장치는 ebay에서 매우 저렴하게(5달러 이하) 발견될 수 있지만, 많은 사람들이 Pro Micro를 플래싱하는 데 어려움을 겪습니다.
 
-## Pull Request
-A request to submit code to QMK. We encourage all users to submit Pull Requests for bugfixes and new features.
+## 풀 리퀘스트
+QMK에 코드를 제출하는 요청입니다. 우리는 모든 사용자가 버그 수정 및 새로운 기능을 위해 풀 리퀘스트를 제출하는 것을 권장합니다.
 
 ## QWERTY
-The standard English keyboard layout, and often a shortcut for other language's standard layouts. Named for the first 6 letters on the keyboard.
+표준 영어 키보드 레이아웃으로, 다른 언어의 표준 레이아웃의 약칭으로도 사용됩니다. 키보드의 첫 6개 글자를 따서 명명되었습니다.
 
 ## QWERTZ
-The standard Deutsche (German) keyboard layout. Named for the first 6 letters on the keyboard.
+독일어 표준 키보드 레이아웃입니다. 키보드의 첫 6개 글자를 따서 명명되었습니다.
 
-## Rollover
-The term for pressing a key while a key is already held down. Variants include 2KRO, 6KRO, and NKRO.
+## 롤오버
+키를 누른 상태에서 다른 키를 누르는 행위입니다. 2KRO, 6KRO, NKRO와 같은 변형이 있습니다.
 
-## Scancode
-A 1 byte number that is sent as part of a HID report over USB that represents a single key. These numbers are documented in the [HID Usage Tables](https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf) published by the [USB-IF](https://www.usb.org/).
+## 스캔코드
+USB를 통해 HID 보고서의 일부로 전송되는 단일 키를 나타내는 1바이트 숫자입니다. 이러한 숫자는 [USB-IF](https://www.usb.org/)에서 발행한 [HID Usage Tables](https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf)에 문서화되어 있습니다.
 
-## Space Cadet Shift
-A special set of shift keys which allow you to type various types of braces by tapping the left or right shift one or more times.
+## 스페이스 캐뎃 쉬프트
+왼쪽 또는 오른쪽 쉬프트를 한 번 이상 탭하여 다양한 종류의 중괄호를 입력할 수 있는 특별한 셋의 쉬프트 키입니다.
 
-* [Space Cadet Shift Documentation](features/space_cadet)
+* [스페이스 캐뎃 쉬프트 문서](features/space_cadet)
 
-## Tap
-Pressing and releasing a key. In some situations you will need to distinguish between a key down and a key up event, and Tap always refers to both at once.
+## 탭
+키를 누르고 해제하는 행위입니다. 일부 상황에서는 키 다운 이벤트와 키 업 이벤트를 구별해야 하며, 탭은 항상 두 가지를 한 번에 나타냅니다.
 
-## Tap Dance
-A feature that lets you assign multiple keycodes to the same key based on how many times you press it.
+## 탭 댄스
+키를 몇 번 누르는지에 따라 여러 키코드를 동일한 키에 할당할 수 있는 기능입니다.
 
-* [Tap Dance Documentation](features/tap_dance)
+* [탭 댄스 문서](features/tap_dance)
 
 ## Teensy
-A low-cost AVR development board that is commonly used for hand-wired builds. A teensy is often chosen despite costing a few dollars more due to its halfkay bootloader, which makes flashing very simple.
+핸드와이어드 빌드에 자주 사용되는 저렴한 AVR 개발 보드입니다. Teensy는 플래싱을 매우 간단하게 만드는 halfkay 부트로더 덕분에 몇 달러 더 비싸더라도 자주 선택됩니다.
 
-## Underlight
-A generic term for LEDs that light the underside of the board. These LEDs typically shine away from the bottom of the PCB and towards the surface the keyboard rests on.
+## 언더라이트
+보드 하단을 비추는 LED에 대한 일반적인 용어입니다. 이 LED는 일반적으로 PCB의 바닥 쪽으로 빛을 발산하고 키보드가 놓여 있는 표면을 비춥니다.
 
-## Unicode
-In the larger computer world Unicode is a set of encoding schemes for representing characters in any language. As it relates to QMK it means using various OS schemes to send unicode codepoints instead of scancodes.
+## 유니코드
+더 큰 컴퓨터 세계에서 유니코드는 모든 언어의 문자를 표현하기 위한 인코딩 스키마 세트입니다. QMK와 관련해서는 스캔코드 대신 유니코드 코드포인트를 보내는 다양한 OS 스키마를 사용하는 것을 의미합니다.
 
-* [Unicode Documentation](features/unicode)
+* [유니코드 문서](features/unicode)
 
-## Unit Testing
-A framework for running automated tests against QMK. Unit testing helps us be confident that our changes do not break anything.
+## 단위 테스트
+QMK에 대해 자동화된 테스트를 실행하기 위한 프레임워크입니다. 단위 테스트를 통해 변경 사항이 아무 것도 망치지 않는다는 것을 확신할 수 있습니다.
 
-* [Unit Testing Documentation](unit_testing)
+* [단위 테스트 문서](unit_testing)
 
 ## USB
-Universal Serial Bus, the most common wired interface for a keyboard.
+범용 직렬 버스(Universal Serial Bus)로, 키보드의 가장 일반적인 유선 인터페이스입니다.
 
-## USB Host (or simply Host)
-The USB Host is your computer, or whatever device your keyboard is plugged into.
+## USB 호스트(또는 호스트)
+USB 호스트는 키보드가 연결된 컴퓨터 또는 다른 장치입니다.
 
-# Couldn't Find the Term You're Looking For?
+# 찾고 있는 용어를 찾지 못하셨나요?
 
-[Open an issue](https://github.com/qmk/qmk_firmware/issues) with your question and the term in question could be added here. Better still, open a pull request with the definition. :)
+
+
+[이슈 열기](https://github.com/qmk/qmk_firmware/issues)와 질문과 관련된 용어를 여기에 추가할 수 있습니다. 더 나아가, 정의를 추가하는 풀 리퀘스트를 열 수도 있습니다. :)

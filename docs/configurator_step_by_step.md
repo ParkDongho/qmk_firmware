@@ -1,74 +1,74 @@
-# QMK Configurator: Step by Step
+# QMK Configurator: 단계별 가이드
 
-This page describes the steps for building your firmware in QMK Configurator.
+이 페이지에서는 QMK Configurator에서 펌웨어를 빌드하는 단계를 설명합니다.
 
-## Step 1: Select Your Keyboard
+## 1단계: 키보드 선택
 
-Click the drop down box and select the keyboard you want to create a keymap for.
-
-::: tip
-If your keyboard has several versions, make sure you select the correct one.
-:::
-
-I'll say that again because it's important:
-
-::: warning
-**MAKE SURE YOU SELECT THE RIGHT VERSION!**
-:::
-
-Unfortunately if your keyboard has been advertised to be powered by QMK but is not in the list, you will **not** be able to use Configurator to customize your keyboard.
-
-Chances are a developer hasn't gotten round to adding support or we haven't had a chance to merge it in yet. If there is no active [Pull Request](https://github.com/qmk/qmk_firmware/pulls?q=is%3Aopen+is%3Apr+label%3Akeyboard), contact the manufacturer and encourage them to add support.
-
-## Step 2: Select Your Keyboard Layout
-
-Choose the layout that best represents the keymap you want to create. Some keyboards do not have enough layouts or correct layouts defined yet. They will be supported in the future.
-
-::: warning
-Sometimes there isn't a layout that supports your exact build. In that case select `LAYOUT_all`.
-:::
-
-## Step 3: Name Your Keymap
-
-Call this keymap what you want.
+드롭다운 상자를 클릭하고 키맵을 만들고자 하는 키보드를 선택하세요.
 
 ::: tip
-If you are running into issues when compiling, it may be worth changing this name, as it may already exist in the QMK Firmware repo.
+키보드에 여러 버전이 있는 경우 올바른 버전을 선택했는지 확인하세요.
 :::
 
-## Step 4: Define Your Keymap
+다시 말하지만, 이것은 중요합니다:
 
-Keycode Entry is accomplished in one of 3 ways:
+::: warning
+**올바른 버전을 선택했는지 확인하세요!**
+:::
 
-1. Drag and drop
-2. Clicking on an empty spot on the layout, then clicking the keycode you desire
-3. Clicking on an empty spot on the layout, then pressing the physical key on your keyboard
+불행히도, QMK로 구동된다고 광고된 키보드가 목록에 없다면 Configurator를 사용하여 키보드를 사용자 정의할 수 **없습니다**.
+
+개발자가 아직 지원을 추가하지 않았거나 우리가 아직 병합할 기회를 갖지 못했기 때문일 가능성이 큽니다. 활성 [Pull Request](https://github.com/qmk/qmk_firmware/pulls?q=is%3Aopen+is%3Apr+label%3Akeyboard)가 없는 경우 제조업체에 연락하여 지원 추가를 권장하세요.
+
+## 2단계: 키보드 레이아웃 선택
+
+생성하고자 하는 키맵을 가장 잘 나타내는 레이아웃을 선택하세요. 일부 키보드는 아직 충분한 레이아웃이나 올바른 레이아웃이 정의되지 않았습니다. 이러한 경우, `LAYOUT_all`을 선택하세요.
+
+::: warning
+때로는 정확한 빌드를 지원하는 레이아웃이 없을 수 있습니다. 이 경우 `LAYOUT_all`을 선택하세요.
+:::
+
+## 3단계: 키맵 이름 지정
+
+원하는 이름으로 키맵을 지정하세요.
 
 ::: tip
-Hover your mouse over a key and a short blurb will tell you what that keycode does. For a more verbose description please see:
+컴파일 시 문제가 발생하는 경우, QMK Firmware 저장소에 이미 존재하는 이름일 수 있으므로 이름을 변경하는 것이 좋습니다.
 :::
 
-* [Basic Keycode Reference](keycodes_basic)
-* [Advanced Keycode Reference](feature_advanced_keycodes)
+## 4단계: 키맵 정의
+
+키코드를 입력하는 방법은 다음 세 가지가 있습니다:
+
+1. 드래그 앤 드롭
+2. 레이아웃의 빈 공간을 클릭한 후 원하는 키코드 클릭
+3. 레이아웃의 빈 공간을 클릭한 후 실제 키보드의 물리적 키 누르기
+
+::: tip
+마우스를 키 위에 올려놓으면 해당 키코드가 하는 일을 짧게 설명하는 툴팁이 나타납니다. 더 자세한 설명이 필요하다면 다음을 참조하세요:
+:::
+
+* [기본 키코드 참조](keycodes_basic)
+* [고급 키코드 참조](feature_advanced_keycodes)
 
 ::: warning
-If your selected layout doesn't match your physical build leave the unused keys blank. If you're not sure which key is in use, for example you have a one backspace key but `LAYOUT_all` has 2 keys, put the same keycode in both locations.
+선택한 레이아웃이 실제 빌드와 일치하지 않는 경우 사용하지 않는 키는 비워두세요. 예를 들어, 한 개의 백스페이스 키만 사용하지만 `LAYOUT_all`에는 두 개의 키가 있는 경우, 두 위치에 동일한 키코드를 넣으세요.
 :::
 
-## Step 5: Save Your Keymap for Future Changes
+## 5단계: 나중에 변경할 수 있도록 키맵 저장
 
-When you're satisfied with your keymap or just want to work on it later, press the `Download this QMK Keymap JSON File` button. It will save your keymap to your computer. You can then load this .json file in the future by pressing the `Upload a QMK Keymap JSON File` button.
+키맵에 만족하거나 나중에 작업을 계속하고자 할 때, `Download this QMK Keymap JSON File` 버튼을 눌러 키맵을 컴퓨터에 저장하세요. 나중에 `Upload a QMK Keymap JSON File` 버튼을 눌러 이 .json 파일을 로드할 수 있습니다.
 
 ::: warning
-**CAUTION:** This is not the same type of .json file used for kbfirmware.com or any other tool. If you try to use this for those tools, or the .json from those tools with QMK Configurator, you will encounter problems.
+**주의:** 이는 kbfirmware.com이나 다른 도구에서 사용하는 .json 파일과 동일한 유형이 아닙니다. 이 도구에서 이 파일을 사용하려 하거나, 반대로 QMK Configurator에서 다른 도구의 .json 파일을 사용하려 하면 문제가 발생할 수 있습니다.
 :::
 
-## Step 6: Compile Your Firmware File
+## 6단계: 펌웨어 파일 컴파일
 
-Press the green `Compile` button.
+녹색 `Compile` 버튼을 누르세요.
 
-When the compilation is done, you will be able to press the green `Download Firmware` button.
+컴파일이 완료되면 녹색 `Download Firmware` 버튼을 눌러 펌웨어를 다운로드할 수 있습니다.
 
-## Next steps: Flashing Your Keyboard
+## 다음 단계: 키보드 플래싱
 
-Please refer to [Flashing Firmware](newbs_flashing).
+[펌웨어 플래싱](newbs_flashing)을 참조하세요.

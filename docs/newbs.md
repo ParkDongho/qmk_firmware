@@ -1,25 +1,25 @@
-# The QMK Tutorial
+# QMK 튜토리얼
 
-Your computer keyboard has a processor inside of it, similar to the one inside your computer. This processor runs software that is responsible for detecting button presses and informing the computer when keys are pressed. QMK Firmware fills the role of that software, detecting button presses and passing that information on to the host computer. When you build your custom keymap, you are creating an executable program for your keyboard.
+컴퓨터 키보드에는 컴퓨터 내부에 있는 것과 유사한 프로세서가 내장되어 있습니다. 이 프로세서는 버튼이 눌린 것을 감지하고 컴퓨터에 키가 눌렸다는 정보를 전달하는 소프트웨어를 실행합니다. QMK 펌웨어는 이 소프트웨어의 역할을 하여 버튼이 눌린 것을 감지하고 해당 정보를 호스트 컴퓨터에 전달합니다. 맞춤형 키맵을 만들 때, 키보드를 위한 실행 가능한 프로그램을 만드는 것입니다.
 
-QMK tries to put a lot of power into your hands by making easy things easy, and hard things possible. You don't have to know how to program to create powerful keymaps — you only have to follow a few simple syntax rules.
+QMK는 쉬운 것은 쉽게, 어려운 것은 가능하게 만들어 많은 기능을 제공하려고 합니다. 강력한 키맵을 만들기 위해 프로그래밍을 배울 필요는 없습니다. 몇 가지 간단한 문법 규칙만 따르면 됩니다.
 
-Not sure if your keyboard can run QMK? If it's a mechanical keyboard you built yourself chances are good it can. We support a [large number of hobbyist boards](https://qmk.fm/keyboards/). If your current keyboard can't run QMK there are a lot of choices out there for boards that do.
+당신의 키보드가 QMK를 실행할 수 있는지 확실하지 않으신가요? 직접 조립한 기계식 키보드라면 실행할 가능성이 큽니다. 우리는 [많은 취미용 보드](https://qmk.fm/keyboards/)를 지원합니다. 현재 키보드가 QMK를 실행할 수 없다면, 실행할 수 있는 많은 보드 옵션이 있습니다.
 
-::: tip Is This Guide For Me?
-If the thought of programming intimidates you, please [take a look at our online GUI](newbs_building_firmware_configurator) instead.
+::: tip 이 가이드가 저를 위한 건가요?
+프로그래밍이 겁나신다면, [온라인 GUI](newbs_building_firmware_configurator)를 대신 살펴보시기 바랍니다.
 :::
 
-## Overview
+## 개요
 
-This guide is suitable for everyone who wants to build a keyboard firmware using the source code. If you are already a programmer you will find the process very familiar and easier to follow. There are 3 main sections to this guide:
+이 가이드는 소스 코드를 사용하여 키보드 펌웨어를 만들고자 하는 모든 사람에게 적합합니다. 이미 프로그래머라면 이 과정을 매우 익숙하게 느끼고 따라하기 쉬울 것입니다. 이 가이드는 3개의 주요 섹션으로 구성되어 있습니다:
 
-1. [Setup Your Environment](newbs_getting_started)
-2. [Building Your First Firmware](newbs_building_firmware)
-3. [Flashing Firmware](newbs_flashing)
+1. [환경 설정하기](newbs_getting_started)
+2. [첫 펌웨어 빌드하기](newbs_building_firmware)
+3. [펌웨어 플래싱하기](newbs_flashing)
 
-This guide is focused on helping someone who has never compiled software before. It makes choices and recommendations based on that viewpoint. There are alternative methods for many of these procedures, and we support most of those alternatives. If you have any doubt about how to accomplish a task you can [ask us for guidance](support).
+이 가이드는 소프트웨어를 처음 컴파일하는 사람을 돕는 데 중점을 둡니다. 이 가이드는 그러한 관점에서 선택과 권장 사항을 제시합니다. 이 절차의 대안적인 방법이 많이 있으며, 우리는 대부분의 대안을 지원합니다. 작업 수행 방법에 대해 의문이 있다면 [도움말을 요청](support)할 수 있습니다.
 
-## Additional Resources
+## 추가 리소스
 
-Beyond this guide there are several resources you may find helpful while you learn QMK. We've collected them on the [Syllabus](syllabus) and [Learning Resources](newbs_learn_more_resources) pages.
+이 가이드 외에도 QMK를 배우는 동안 도움이 될 만한 여러 리소스가 있습니다. 우리는 이들을 [교과 과정](syllabus) 및 [학습 리소스](newbs_learn_more_resources) 페이지에 모아두었습니다.

@@ -1,53 +1,53 @@
-# Frequently Asked Questions
+# 자주 묻는 질문 (FAQ)
 
-## What is QMK?
+## QMK란 무엇인가요?
 
-[QMK](https://github.com/qmk), short for Quantum Mechanical Keyboard, is a group of people building tools for custom keyboards. We started with the [QMK firmware](https://github.com/qmk/qmk_firmware), a heavily modified fork of [TMK](https://github.com/tmk/tmk_keyboard).
+[QMK](https://github.com/qmk)는 Quantum Mechanical Keyboard의 약자로, 커스텀 키보드를 위한 도구를 만드는 사람들의 모임입니다. 우리는 [QMK 펌웨어](https://github.com/qmk/qmk_firmware)로 시작했으며, 이는 [TMK](https://github.com/tmk/tmk_keyboard)를 많이 수정한 포크입니다.
 
-## I don't know where to start!
+## 어디서부터 시작해야 할지 모르겠어요!
 
-If this is the case, then you should start with our [Newbs Guide](newbs). There is a lot of great info there, and that should cover everything you need to get started.
+이 경우, [Newbs Guide](newbs)부터 시작하는 것이 좋습니다. 거기에는 시작하는 데 필요한 많은 정보가 포함되어 있습니다.
 
-If that's an issue, hop onto the [QMK Configurator](https://config.qmk.fm), as that will handle a majority of what you need there.
+만약 그것이 어려운 문제라면, [QMK 설정 도구](https://config.qmk.fm)를 사용해 보세요. 이 도구는 필요한 대부분의 작업을 처리해 줄 것입니다.
 
-## How can I flash the firmware I built?
+## 빌드한 펌웨어를 어떻게 플래시할 수 있나요?
 
-First, head to the [Compiling/Flashing FAQ Page](faq_build). There is a good deal of info there, and you'll find a bunch of solutions to common issues there.
+먼저 [컴파일/플래싱 FAQ 페이지](faq_build)로 이동하세요. 거기에는 많은 정보가 있으며, 일반적인 문제에 대한 많은 해결책을 찾을 수 있습니다.
 
-## What if I have an issue that isn't covered here?
+## 여기에서 다루지 않는 문제가 생기면 어떻게 하나요?
 
-Okay, that's fine. Then please check the [open issues in our GitHub](https://github.com/qmk/qmk_firmware/issues) to see if somebody is experiencing the same thing (make sure it's not just similar, but actually the same).
+괜찮습니다. [GitHub의 오픈 이슈](https://github.com/qmk/qmk_firmware/issues)를 확인하여 누군가가 같은 문제를 겪고 있는지 확인하세요(유사한 문제인지, 실제로 동일한 문제인지 확인하세요).
 
-If you can't find anything, then please open a [new issue](https://github.com/qmk/qmk_firmware/issues/new)!
+그래도 찾을 수 없다면, [새 이슈를 열어주세요](https://github.com/qmk/qmk_firmware/issues/new)!
 
-## What if I found a bug?
+## 버그를 발견하면 어떻게 하나요?
 
-Then please open an [issue](https://github.com/qmk/qmk_firmware/issues/new), and if you know how to fix it, open up a Pull Request on GitHub with the fix.
+그러면 [이슈](https://github.com/qmk/qmk_firmware/issues/new)를 열어주세요. 만약 해결 방법을 알고 있다면, GitHub에 수정 사항을 포함한 Pull Request를 열어주세요.
 
-## But `git` and `GitHub` are intimidating!
+## `git`과 `GitHub`가 어렵게 느껴져요!
 
-Don't worry, we have some pretty nice [Guidelines](newbs_git_best_practices) on how to start using `git` and GitHub to make things easier to develop.
+걱정하지 마세요, `git`과 GitHub를 쉽게 사용할 수 있도록 도와주는 [가이드라인](newbs_git_best_practices)이 있습니다.
 
-Additionally, you can find additional `git` and GitHub related links [here](newbs_learn_more_resources).
+추가적으로, `git` 및 GitHub와 관련된 링크를 [여기](newbs_learn_more_resources)에서 찾을 수 있습니다.
 
-## I have a Keyboard that I want to add support for
+## 지원을 추가하고 싶은 키보드가 있어요
 
-Awesome! Open up a Pull Request for it. We'll review the code, and merge it!
+좋아요! Pull Request를 열어주세요. 코드를 검토하고 병합하겠습니다!
 
-### What if I want to brand it with `QMK`?
+### QMK로 브랜드를 만들고 싶다면 어떻게 하나요?
 
-That's amazing! We would love to assist you with that!
+멋지네요! 도와드리겠습니다!
 
-In fact, we have a [whole page](https://qmk.fm/powered/) dedicated to adding QMK Branding to your page and keyboard. This covers pretty much everything you need (knowledge and images) to officially support QMK.
+사실, 우리는 페이지와 키보드에 QMK 브랜드를 추가하는 것에 관한 [전용 페이지](https://qmk.fm/powered/)가 있습니다. 여기에는 공식적으로 QMK를 지원하는 데 필요한 모든 지식과 이미지가 포함되어 있습니다.
 
-If you have any questions about this, open an issue or head to [Discord](https://discord.gg/Uq7gcHh).
+이와 관련하여 궁금한 점이 있으면 이슈를 열거나 [Discord](https://discord.gg/Uq7gcHh)로 오세요.
 
-## What Differences Are There Between QMK and TMK?
+## QMK와 TMK의 차이점은 무엇인가요?
 
-TMK was originally designed and implemented by [Jun Wako](https://github.com/tmk). QMK started as [Jack Humbert](https://github.com/jackhumbert)'s fork of TMK for the Planck. After a while Jack's fork had diverged quite a bit from TMK, and in 2015 Jack decided to rename his fork to QMK.
+TMK는 원래 [Jun Wako](https://github.com/tmk)에 의해 설계되고 구현되었습니다. QMK는 [Jack Humbert](https://github.com/jackhumbert)가 Planck용으로 만든 TMK의 포크로 시작했습니다. 시간이 지나면서 Jack의 포크는 TMK와 상당히 달라졌고, 2015년에 Jack은 자신의 포크를 QMK로 이름을 바꾸기로 결정했습니다.
 
-From a technical standpoint QMK builds upon TMK by adding several new features. Most notably QMK has expanded the number of available keycodes and uses these to implement advanced features like `S()`, `LCTL()`, and `MO()`. You can see a complete list of these keycodes in [Keycodes](keycodes).
+기술적인 관점에서 QMK는 여러 가지 새로운 기능을 추가하여 TMK를 기반으로 구축되었습니다. 가장 눈에 띄는 점은 QMK가 사용할 수 있는 키코드의 수를 확장하고, 이를 통해 `S()`, `LCTL()`, `MO()`와 같은 고급 기능을 구현한다는 것입니다. 이러한 키코드의 전체 목록은 [Keycodes](keycodes)에서 볼 수 있습니다.
 
-From a project and community management standpoint TMK maintains all the officially supported keyboards by himself, with a bit of community support. Separate community maintained forks exist or can be created for other keyboards. Only a few keymaps are provided by default, so users typically don't share keymaps with each other. QMK encourages sharing of both keyboards and keymaps through a centrally managed repository, accepting all pull requests that follow the quality standards. These are mostly community maintained, but the QMK team also helps when necessary.
+프로젝트 및 커뮤니티 관리 측면에서 TMK는 커뮤니티의 약간의 지원을 받으면서 공식적으로 지원되는 모든 키보드를 스스로 유지 관리합니다. 다른 키보드를 위해 별도의 커뮤니티 유지 포크가 존재하거나 생성될 수 있습니다. 기본적으로 몇 가지 키맵만 제공되므로 사용자들은 일반적으로 키맵을 서로 공유하지 않습니다. QMK는 중앙 관리 리포지토리를 통해 키보드와 키맵을 공유하는 것을 권장하며, 품질 기준을 따르는 모든 Pull Request를 수락합니다. 이는 주로 커뮤니티가 유지하지만, 필요한 경우 QMK 팀도 도움을 줍니다.
 
-Both approaches have their merits and their drawbacks, and code flows freely between TMK and QMK when it makes sense.
+두 접근 방식 모두 장단점이 있으며, TMK와 QMK 간의 코드는 필요할 때 자유롭게 흐릅니다.
